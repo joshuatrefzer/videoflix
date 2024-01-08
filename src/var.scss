@@ -1,0 +1,23 @@
+$red:#e50815;
+$bg-black:rgb(23, 23, 23);
+$font: sans-serif;
+
+@mixin center($display:flex , $jc:center , $ai:center){
+    display: $display;
+    justify-content: $jc;
+    align-items: $ai;
+}
+
+@mixin center-column($display:flex , $jc:flex-start , $ai:center , $fd:column ){
+    display: $display;
+    justify-content: $jc;
+    align-items: $ai;
+    flex-direction: $fd;
+}
+
+@mixin full-width($padding: 0px , $margin: 0px, $height: 50px ){
+    width: calc(100% - (2 * $padding) - (2 * $margin));
+    height: $height;
+    padding: $padding;
+    margin: $margin;
+}

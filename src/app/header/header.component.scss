@@ -1,0 +1,20 @@
+@import "./../../var.scss";
+
+header {
+    @include full-width($height: 80px);
+    @include center();
+    background-color: black;
+}
+
+.right , .left {
+    @include full-width($padding: 10px);
+    @include center($jc:space-between);
+}
+
+.movieflix {
+    color: $red;
+    font-size: 30px;
+    font-weight: bold;
+    width: 280px;
+    @include center();
+}
