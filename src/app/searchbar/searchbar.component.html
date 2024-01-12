@@ -1,0 +1,19 @@
+<div class="search-bar">
+
+    @if(isSearchExpanded){
+        <div class="container-search">
+            <input [class.hide]="hide" class="input-animation" type="text" placeholder="Search..."
+                (keypress)="startSearch()" [(ngModel)]="searchValue">
+        </div>
+    }
+
+
+
+    @if(!isSearchExpanded){
+        <div class="container-img" (click)="toggleSearch()">
+            <img src="assets/img/search.png" alt="Lupe">
+        </div>
+    }
+
+
+</div>

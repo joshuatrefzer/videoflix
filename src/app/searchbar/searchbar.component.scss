@@ -1,0 +1,70 @@
+@import "./../../var.scss";
+
+
+.input-animation {
+    animation: show ease-in-out 300ms;
+    width: 90%;
+    transition: all ease-in-out 300ms;
+}
+
+.hide {
+    width: 0%;
+    transition: all ease-in-out 300ms;
+}
+
+@keyframes show {
+    0% {
+        width: 0%;
+    }
+
+    100% {
+        width: 90%;
+
+    }
+}
+
+.search-bar {
+    @include center($jc:flex-start);
+    img {
+        height: 20px;
+    }
+    min-width: 300px;
+}
+
+.container-img {
+    height: 100%;
+    background-color: $bg-black;
+    padding: 5px;
+    border-radius: 100%;
+    @include center();
+    width: 30px;
+    height: 30px;
+    &:hover {
+        cursor: pointer;
+        opacity: 0.8;
+    }
+} 
+
+.container-search {
+    height: 100%;
+    width: 100%;
+} 
+
+input {
+    background-color: $bg-black;
+    height: 30px;
+    border-radius: 10px;
+    box-shadow: none;
+    border: none;
+    padding: 5px;
+    color: white;
+    opacity: 0.8;
+  
+}
+
+input:focus {
+    border: none;
+    outline: none;
+    box-shadow: none;
+    opacity: 1;
+}

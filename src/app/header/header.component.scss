@@ -6,15 +6,21 @@ header {
     background-color: black;
 }
 
-.right , .left {
+.left {
     @include full-width($padding: 10px);
     @include center($jc:space-between);
+}
+
+
+.right {
+    @include full-width($padding: 10px);
+    @include center($jc:flex-end);
 }
 
 .movieflix {
     color: $red;
     font-size: 30px;
     font-weight: bold;
-    width: 280px;
+    padding-left: 25px;
     @include center();
 }
