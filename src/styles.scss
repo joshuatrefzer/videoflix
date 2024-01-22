@@ -7,12 +7,39 @@ body {
     color: white;
     margin: 0;
     font-family: $font;
+
     a {
         text-decoration: none;
         color: white;
+
         &:hover {
             opacity: 0.8;
             cursor: pointer;
         }
     }
+}
+
+
+// --sb-track-color: #252525;
+// --sb-thumb-color: #616161;
+// --sb-size: 1px;
+
+// scrollbar-color: var(--sb-thumb-color) 
+//                  var(--sb-track-color);
+
+
+::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+}
+
+::-webkit-scrollbar-track {
+    background: #252525;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background:  #616161;
+    border-radius: 5px;
+
 }
