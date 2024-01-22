@@ -43,3 +43,37 @@ body {
     border-radius: 5px;
 
 }
+
+input {
+    background-color: $bg-black;
+    height: 30px;
+    border-radius: 10px;
+    box-shadow: none;
+    border: none;
+    padding: 5px 10px;
+    color: white;
+    opacity: 0.8;
+}
+
+input:focus {
+    border: none;
+    outline: none;
+    box-shadow: none;
+    opacity: 1;
+}
+
+button {
+    background-color: $bg-black;
+    color: white;
+    border: white 1px solid;
+    box-shadow: none;
+    padding: 10px 30px;
+    border-radius: 10px;
+    &:hover {
+        cursor: pointer;
+        border: $bg-black 1px solid;
+        color: $bg-black;
+        background-color: white;
+        font-weight: bold;
+    }
+}

@@ -1,13 +1,18 @@
 import { Component } from '@angular/core';
 import { SearchbarComponent } from '../searchbar/searchbar.component';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
     selector: 'app-header',
     standalone: true,
     templateUrl: './header.component.html',
     styleUrl: './header.component.scss',
-    imports: [SearchbarComponent]
+    imports: [SearchbarComponent, RouterModule]
 })
 export class HeaderComponent {
+
+    constructor(public router:Router){
+
+    }
 
 }

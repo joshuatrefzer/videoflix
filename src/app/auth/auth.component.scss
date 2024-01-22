@@ -1,0 +1,39 @@
+@import "../../var.scss";
+
+.container {
+    @include full-width();
+    @include center();
+    height: 100vh;
+}
+
+
+
+.login {
+    width: 30%;
+    // height: 70%;
+    background-color: rgb(0, 0, 0);
+    border-radius: 20px;
+    padding: 10px;
+    @include center-column();
+}
+
+input {
+    height: 40px;
+    width: 70%;
+    margin-top: 30px;
+}
+
+button {
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.question {
+    margin-top: 20px;
+    font-size: 15px;
+}
+
+a {
+    color: red;
+    cursor: pointer;
+}

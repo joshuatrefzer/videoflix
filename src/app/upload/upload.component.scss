@@ -1,0 +1,27 @@
+@import "../../var.scss";
+
+
+.container {
+    @include full-width();
+    @include center();
+    height: calc(100vh - 80px);
+}
+
+.left {
+    height:  calc(100% - 40px);
+    width: calc(70% - 40px);
+    margin: 20px;
+    box-shadow: 1px 1px 10px black;
+    border-radius: 10px;
+}
+
+.right {
+    height: calc(100% - 40px);
+    width: calc(30% - 20px);
+    margin: 20px;
+    margin-left: 0px;
+    box-shadow: 1px 1px 10px black;
+    border-radius: 10px;
+
+
+}

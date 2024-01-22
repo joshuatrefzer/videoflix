@@ -1,0 +1,44 @@
+@import "../../var.scss";
+
+
+.content {
+    @include full-width();
+    @include center-column();
+    height: calc(100vh - 80px);
+    overflow:scroll;
+}
+
+.row-container {
+    position: relative;
+    padding: 10px;
+    margin:10px;
+    margin-bottom: 0px;
+    @include full-width($padding:10px , $margin:10px);
+    @include center($jc:flex-start);
+    min-height: calc(33% - 20px);
+    background-color: $bg-black;
+    box-shadow: 2px 2px 10px black;
+    border-radius: 5px;
+}
+
+.video-rows {
+    overflow-x: scroll;
+    gap: 30px;
+    @include full-width($padding:10px , $margin:10px);
+    @include center($jc:flex-start);
+    height: 100%;
+    
+}
+
+
+
+.category {
+    position: absolute;
+    top: 0;
+    left: 10px;
+    right: 0;
+    height: 30px;
+    @include center($jc:flex-start);
+    font-weight: bold;
+    font-size: 20px;
+}

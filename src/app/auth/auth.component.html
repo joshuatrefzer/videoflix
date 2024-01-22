@@ -1,0 +1,50 @@
+<div class="container">
+
+    @if(directTo == 'login') {
+
+    <form class="login">
+        <h1>LOGIN</h1>
+        <input placeholder="e-mail..." type="email">
+        <input placeholder="password..." type="password">
+        <div class="question">Do you haven't registered yet? Please click <a (click)="directTo = 'signUp'; ">here</a> to
+            sign up.</div>
+        <button (click)="logIn()" >LOGIN</button>
+    </form>
+
+    }
+
+
+    @else if(directTo == 'signUp'){
+
+    <form class="login">
+        <h1>SIGN UP</h1>
+        <input placeholder="first name" type="text">
+        <input placeholder="last name" type="text">
+        <input placeholder="e-mail" type="email">
+        <input placeholder="set password" type="password">
+        <input placeholder="repeat password" type="password">
+        <div class="question">Do you have registered already? Please click <a (click)="directTo = 'login'; ">here</a> to
+            log in.</div>
+        <button>SIGN UP</button>
+    </form>
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
