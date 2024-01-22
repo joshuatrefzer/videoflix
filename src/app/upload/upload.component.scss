@@ -7,21 +7,46 @@
     height: calc(100vh - 80px);
 }
 
+.input-container {
+    @include center-column();
+    width: 70%;
+    height: 80%;
+    background-color: black;
+    border-radius: 20px;
+}
+
+.top {
+    @include full-width();
+    height: 20%;
+    text-align: center
+}
+.bottom {
+    @include full-width();
+    @include center();
+    height: 80%;
+}
+
 .left {
-    height:  calc(100% - 40px);
-    width: calc(70% - 40px);
-    margin: 20px;
-    box-shadow: 1px 1px 10px black;
-    border-radius: 10px;
+    width: 50%;
+    height: 100%;
+    gap: 20px;
+    @include center-column();
 }
 
 .right {
-    height: calc(100% - 40px);
-    width: calc(30% - 20px);
-    margin: 20px;
-    margin-left: 0px;
-    box-shadow: 1px 1px 10px black;
-    border-radius: 10px;
-
-
+    width: 50%;
+    height: 100%;
+    @include center-column();
+    gap: 20px;
 }
+
+input {
+    width: 90%;
+    height: 50px;
+}
+
+input[type='file'] {
+    width: 90px;
+    @include center();
+}
+

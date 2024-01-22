@@ -2,7 +2,7 @@
 
     @if(isSearchExpanded){
         <div class="container-search">
-            <input [class.hide]="hide" class="input-animation" type="text" placeholder="Search..."
+            <input [class.hide]="hide" class="input-animation" type="search" placeholder="Search..."
                 (keypress)="startSearch()" [(ngModel)]="searchValue">
         </div>
     }
