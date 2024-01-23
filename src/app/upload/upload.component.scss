@@ -10,7 +10,8 @@
 .input-container {
     @include center-column();
     width: 70%;
-    height: 80%;
+    padding: 20px;
+    padding-bottom: 80px;
     background-color: black;
     border-radius: 20px;
 }
@@ -43,10 +44,68 @@
 input {
     width: 90%;
     height: 50px;
+    margin-top: 15px;
 }
 
 input[type='file'] {
-    width: 90px;
+    display: none;
+}
+
+label {
+    background-color: $bg-black;
+    margin-top: 15px;
+    padding: 15px 40px;
+    width: 200px;
     @include center();
+    border-radius: 10px;
+    &:hover{
+        cursor: pointer;
+        opacity: 0.8 ;
+    }
+}
+
+button {
+    background-color: rgb(171, 171, 171);
+    color: black;
+    height: 50px;
+    border: none;
+    font-weight:bold;
+    @include center();
+    gap: 10px;
+    margin-top: 10px;
+    &:hover {
+        font-weight:bold;
+        opacity: 0.8;
+    }
+
+    img {
+        height: 20px;
+    }
+}
+
+textarea {
+    @extend input;
+    border-radius: 10px;
+    background-color: rgb(67, 67, 67);
+    opacity: 0.8;
+    border: none;
+    font-size: 15px;
+    font-family: sans-serif;
+    resize: none;
+    height: 150px;
+    padding: 10px;
+    color: white;
+}
+
+textarea:focus {
+    border: none;
+    opacity: 1;
+    outline: none;
+}
+
+.row {
+    @include center($jc:space-between);
+    width: 90%;
+    padding: 5px 10px;
 }
 

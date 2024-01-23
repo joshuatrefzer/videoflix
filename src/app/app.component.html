@@ -1,5 +1,20 @@
-@if(this.authService.userisLoggedIn){
-    <app-header></app-header>
-}
+<div [ngClass]="{'blur': this.popup.bg}">
 
-<router-outlet></router-outlet>
+
+    @if(this.authService.userisLoggedIn){
+    <app-header></app-header>
+    }
+
+    <router-outlet></router-outlet>
+
+</div>
+
+@if (popup.bg) {
+<div class="popup-bg" (click)="popup.closePopups()" >
+    @if (popup.videoDetail) {
+    <app-video-detail class="popup"></app-video-detail>
+    }
+
+
+</div>
+}

@@ -7,5 +7,5 @@ export class AuthService {
 
   constructor() { }
 
-  userisLoggedIn = true;
+  userisLoggedIn = false;
 }

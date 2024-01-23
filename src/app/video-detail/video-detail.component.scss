@@ -1,0 +1,21 @@
+@import "../../var.scss";
+
+.container {
+    height: 100vh;
+    width: 100%;
+    z-index: 200;
+    position: fixed;
+    top: 0;
+    left: 0;
+    @include center();
+    filter: blur(0.7);
+}
+
+.popup {
+    height: 70%;
+    width: 60%;
+    background-color: black;
+    border-radius: 20px;
+    box-shadow: 5px 5px 10px black;
+}
+
