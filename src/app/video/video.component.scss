@@ -1,21 +1,19 @@
 @import "../../var.scss";
 
 .thumbnail {
-    height: 100%;
-    width: 160px;
+    height: 150px;
+    width: 250px;
+    overflow: hidden;
+    object-position: center;
     object-fit: contain;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: rgb(66, 66, 66);
     border-radius: 5px;
     box-shadow: 1px 1px 10px black;
-
-    img {
-        max-width: 160px;
-        z-index: 2;
-        height: 100%;
-        border-radius: 5px;
-    }
-
     position: relative;
-
+    @include center();
+    
     &:hover {
         .thumb-title {
             cursor: pointer;

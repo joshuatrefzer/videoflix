@@ -25,7 +25,7 @@ export class SearchbarComponent {
   startCount() {
     const intervalId = setInterval(() => {
       this.count++;
-      if (this.count > 5) {
+      if (this.count > 3) {
         this.resetVar();
         clearInterval(intervalId); // Stoppt das Intervall nach dem Aufruf von resetVar()
       }

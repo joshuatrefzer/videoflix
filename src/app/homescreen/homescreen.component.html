@@ -1,58 +1,23 @@
 <div class="content">
-    <div class="row-container">
-        <div class="video-rows">
-            <div class="category">Movies</div>
-            <app-video [video]="3"></app-video>
-            <app-video [video]="2"></app-video>
-            <app-video [video]="3"></app-video>
-            <app-video [video]="4"></app-video>
-            <app-video [video]="3"></app-video>
-            <app-video [video]="2"></app-video>
-            <app-video [video]="3"></app-video>
-            <app-video [video]="4"></app-video>
-            <app-video [video]="3"></app-video>
-            <app-video [video]="2"></app-video>
-            <app-video [video]="3"></app-video>
-            <app-video [video]="4"></app-video>
-        </div>
-    </div>
-    <div class="row-container">
-        <div class="video-rows">
-            <div class="category">Documentation</div>
-            <app-video [video]="4"></app-video>
-            <app-video [video]="2"></app-video>
-            <app-video [video]="3"></app-video>
-            <app-video [video]="4"></app-video>
-            <app-video [video]="3"></app-video>
-            <app-video [video]="2"></app-video>
-            <app-video [video]="3"></app-video>
-            <app-video [video]="4"></app-video>
-            <app-video [video]="3"></app-video>
-            <app-video [video]="2"></app-video>
-            <app-video [video]="3"></app-video>
-            <app-video [video]="4"></app-video>
-        </div>
-    </div>
 
+    @for (genre of genres; track $index) {
+
+
+    @if (backend.filterVideos(genre).length !== 0) {
     <div class="row-container">
+        <div class="category">{{ genre.toUpperCase() }}</div>
         <div class="video-rows">
-            <div class="category">Nature</div>
-            <app-video [video]="3"></app-video>
-            <app-video [video]="2"></app-video>
-            <app-video [video]="3"></app-video>
-            <app-video [video]="4"></app-video>
-            <app-video [video]="3"></app-video>
-            <app-video [video]="2"></app-video>
-            <app-video [video]="3"></app-video>
-            <app-video [video]="4"></app-video>
-            <app-video [video]="3"></app-video>
-            <app-video [video]="2"></app-video>
-            <app-video [video]="3"></app-video>
-            <app-video [video]="4"></app-video>
+
+            @for (video of backend.filterVideos(genre); track $index) {
+                <app-video [video]="video"></app-video>
+            }
+
+
         </div>
     </div>
-    
-   
+    }
+    }
 
-    
+
+
 </div>

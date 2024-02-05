@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Video } from './interface';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,7 @@ export class PopupService {
   constructor() { }
 
   bg:boolean = false;
-  videoDetail: number | undefined;
+  videoDetail: Video | undefined;
 
 
   openPopup(){

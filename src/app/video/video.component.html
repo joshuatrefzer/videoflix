@@ -1,7 +1,6 @@
-<div class="thumbnail" (click)="openVideoDetails()">
-    <img src="assets/img/pic{{video}}.jpg" alt="">
+<div class="thumbnail" (click)="openVideoDetails()" style="background-image: url({{img}});">
     <div class="thumb-title">
-        <span>The Title</span>
+        <span> {{ video?.title }} </span>
     </div>
 </div>
 

@@ -1,6 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { VideoDetailComponent } from '../video-detail/video-detail.component';
 import { PopupService } from '../services/popup.service';
+import { Video } from '../services/interface';
+import { environment } from '../../environments/environment.development';
 
 @Component({
   selector: 'app-video',
@@ -11,7 +13,8 @@ import { PopupService } from '../services/popup.service';
 })
 export class VideoComponent {
 
-  @Input() video:number = 0;
+  @Input() video:Video | undefined;
+  img:string = "";
 
   detail:boolean = false;
 
@@ -19,6 +22,10 @@ export class VideoComponent {
 
   }
 
+  ngOnChanges(changes:SimpleChanges){
+    this.img = environment.baseUrl + this.video?.thumbnail;
+    
+  }
 
   openVideoDetails() {
     this.popup.videoDetail = this.video;

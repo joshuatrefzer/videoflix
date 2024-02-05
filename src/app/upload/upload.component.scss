@@ -10,10 +10,11 @@
 .input-container {
     @include center-column();
     width: 70%;
-    padding: 20px;
-    padding-bottom: 80px;
+    padding: 40px;
+    padding-bottom: 120px;
     background-color: black;
     border-radius: 20px;
+    position: relative;
 }
 
 .top {
@@ -23,7 +24,7 @@
 }
 .bottom {
     @include full-width();
-    @include center();
+    @include center($ai:flex-start);
     height: 80%;
 }
 
@@ -53,7 +54,7 @@ input[type='file'] {
 
 label {
     background-color: $bg-black;
-    margin-top: 15px;
+    margin-top: 5px;
     padding: 15px 40px;
     width: 200px;
     @include center();
@@ -83,6 +84,8 @@ button {
     }
 }
 
+
+
 textarea {
     @extend input;
     border-radius: 10px;
@@ -92,7 +95,7 @@ textarea {
     font-size: 15px;
     font-family: sans-serif;
     resize: none;
-    height: 150px;
+    height: 80px;
     padding: 10px;
     color: white;
 }
