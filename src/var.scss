@@ -21,3 +21,16 @@ $font: sans-serif;
     padding: $padding;
     margin: $margin;
 }
+
+.row {
+    width: 100%;
+    @include center($jc:flex-start);
+}
+
+.text-button {
+    &:hover {
+        cursor: pointer;
+        opacity: 0.8;
+        transition: all ease-in-out 150ms;
+    }
+}

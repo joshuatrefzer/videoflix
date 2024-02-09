@@ -1,9 +1,43 @@
-<div class="container">
-    <div class="popup">
-        
+<div class="container" (click)="handleContainerClick($event)">
+    <div class="popup" (click)="handleContainerClick($event)">
+        <div class="top-container">
+
+            <video id="my-video" class="video-js" controls preload="auto" width="640" height="264" poster="{{ thumb }}"
+                data-setup="{}">
+                <source src="{{ video }}" type="video/mp4" />
+                <source src="MY_VIDEO.webm" type="video/webm" />
+                <p class="vjs-no-js">
+                    To view this video please enable JavaScript, and consider upgrading to a
+                    web browser that
+                    <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+                </p>
+            </video>
+
+
+
+        </div>
+        <div class="bottom-container">
+            <div class="left-side">
+                <div class="row"><span>ACTORS: </span>&nbsp; {{ ps.videoDetail?.actors }}</div>
+                <div class="row"><span>DECRIPTION: </span>&nbsp; {{ ps.videoDetail?.description }}</div>
+                <div class="row"><span>GENRE: </span> &nbsp; {{ ps.videoDetail?.genre }}</div>
+            </div>
+
+            <div class="right-side">
+                <div  class="row quality" ><span (click)="resolution = true;" class="text-button">QUALITY</span></div>
+
+                @if (resolution) {
+                <div class="resolutions">
+                    <span class="text-button" (click)="changeResolution('_420p.mp4' , $event)">low</span>
+                    <span class="text-button" (click)="changeResolution('_720p.mp4' , $event)">middle</span>
+                    <span class="text-button" (click)="changeResolution('' , $event)">high</span>
+                </div>
+                }
+
+
+            </div>
+
+        </div>
+
     </div>
-
-
-
-
 </div>

@@ -12,10 +12,86 @@
 }
 
 .popup {
-    height: 70%;
+    height: 80%;
     width: 60%;
     background-color: black;
     border-radius: 20px;
     box-shadow: 5px 5px 10px black;
+    @include center-column();
 }
 
+.top-container {
+    height: 80%;
+    width: 100%;
+    background-color: black;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+.bottom-container {
+    height: 30%;
+    padding-left: 20px;
+    padding-right: 20px;
+    @include full-width($padding: 20px);
+    @include center();
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    color: white;
+
+    span {
+        font-weight: bold;
+    }
+}
+
+.left-side {
+    height: 100%;
+    width: 50%;
+    @include center-column();
+    gap: 10px;
+}
+
+.right-side {
+    height: 100%;
+    width: 50%;
+    @include center-column();
+}
+
+.resolutions {
+    animation: slide-in ease-in-out 200ms;
+    span {
+        font-weight: 200;
+        padding: 20px;
+        margin-left: 10px;
+        margin-right: 10px;
+        font-size: 12px;
+    }
+}
+
+@keyframes slide-in {
+    0% {
+        transform: translateX(50%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(0%);
+        opacity: 1;
+    }
+}
+
+.quality {
+    display: flex;
+    justify-content: flex-end !important;
+
+    span {
+        font-weight: 200 !important;
+        font-size: 12px;
+
+    }
+
+}
+
+video {
+    width: 100%;
+    height: 100%;
+}

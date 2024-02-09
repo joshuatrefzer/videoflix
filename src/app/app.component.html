@@ -6,15 +6,12 @@
     }
 
     <router-outlet></router-outlet>
-
 </div>
 
 @if (popup.bg) {
-<div class="popup-bg" (click)="popup.closePopups()" >
-    @if (popup.videoDetail) {
+    <div class="popup-bg" (click)="popup.closePopups()"></div>
+}
+
+@if (popup.videoDetail && popup.bg) {
     <app-video-detail class="popup"></app-video-detail>
-    }
-
-
-</div>
 }
