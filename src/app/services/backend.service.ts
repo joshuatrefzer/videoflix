@@ -18,7 +18,7 @@ export class BackendService {
 
   fetchVideoData() {
     if (this.isNecessary()) {
-      this.getVideos().subscribe((data:Video[]) => {
+      this.getVideos().subscribe((data: Video[]) => {
         this.videos = data;
         console.log(this.videos);
       }, error => {
@@ -36,7 +36,7 @@ export class BackendService {
   }
 
   filterVideos(genreToFilter: VideoGenre): Video[] {
-    let filteredVideos:Video[];
+    let filteredVideos: Video[];
     if (genreToFilter) {
       filteredVideos = this.videos.filter(video => video.genre === genreToFilter);
     } else {
