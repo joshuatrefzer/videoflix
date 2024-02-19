@@ -41,6 +41,11 @@ export class VideoDetailComponent implements OnInit, OnDestroy {
     this.ps.videoDetail = undefined;
   }
 
+  /**
+   * 
+   * @param path ...
+   * @param event 
+   */
   changeResolution(path: string, event: MouseEvent) {
     event.stopPropagation();
     this.resetResolutionVars();
