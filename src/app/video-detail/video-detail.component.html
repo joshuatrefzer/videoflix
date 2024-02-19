@@ -1,6 +1,6 @@
 <div class="container" (click)="handleContainerClick($event)">
-    <div class="popup" (click)="handleContainerClick($event)">
-        <div class="top-container">
+    <div [ngClass]="{'big-popup': hideInfo}" class="popup" (click)="handleContainerClick($event)">
+        <div [ngClass]="{'full-fill': hideInfo}" class="top-container">
 
             <video id="my-video" class="video-js" controls preload="auto" width="640" height="264" poster="{{ thumb }}"
                 data-setup="{}">
@@ -16,28 +16,46 @@
 
 
         </div>
-        <div class="bottom-container">
+        <div [ngClass]="{'hide-infobox': hideInfo}" class="bottom-container">
             <div class="left-side">
-                <div class="row"><span>ACTORS: </span>&nbsp; {{ ps.videoDetail?.actors }}</div>
-                <div class="row"><span>DECRIPTION: </span>&nbsp; {{ ps.videoDetail?.description }}</div>
-                <div class="row"><span>GENRE: </span> &nbsp; {{ ps.videoDetail?.genre }}</div>
+                @if (!hideInfo) {
+                <div class="row"><span>Actors: </span>&nbsp; {{ ps.videoDetail?.actors }}</div>
+                <div class="row"><span>Description: </span>&nbsp; {{ ps.videoDetail?.description }}</div>
+                <div class="row"><span>Genre: </span> &nbsp; {{ ps.videoDetail?.genre }}</div>
+                }
             </div>
 
             <div class="right-side">
-                <div  class="row quality" ><span (click)="resolution = true;" class="text-button">QUALITY</span></div>
-
-                @if (resolution) {
-                <div class="resolutions">
-                    <span class="text-button" (click)="changeResolution('_420p.mp4' , $event)">low</span>
-                    <span class="text-button" (click)="changeResolution('_720p.mp4' , $event)">middle</span>
-                    <span class="text-button" (click)="changeResolution('' , $event)">high</span>
-                </div>
+                @if (!resolution) {
+                <div class="row quality"><span (click)="showResolution($event)" class="text-button">QUALITY</span></div>
                 }
 
 
+                @if (resolution) {
+                <div [ngClass]="{'hide-resolution': hideResolution}" class="resolutions">
+                    <span [ngClass]="{'selected': low}" class="text-button"
+                        (click)="changeResolution('_480p.mp4' , $event); low =true;">low</span>
+                    <span [ngClass]="{'selected': middle}" class="text-button"
+                        (click)="changeResolution('_720p.mp4' , $event); middle = true;">middle</span>
+                    <span [ngClass]="{'selected': high}" class="text-button"
+                        (click)="changeResolution('.mp4' , $event); high=true; ">high</span>
+                </div>
+                }
+            </div>
+
+            <div class="arrow-button">
+                <img (click)="hideInfoBox()" src="assets/img/double-arrow-bottom-icon.png" alt="">
             </div>
 
         </div>
 
     </div>
+
+    @if (hideInfo) {
+    <div class="arrow-button">
+        <img style="transform: rotate(180deg);" (click)="showInfoBox($event)"
+            src="assets/img/double-arrow-bottom-icon.png" alt="">
+    </div>
+    }
+
 </div>
