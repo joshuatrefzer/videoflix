@@ -3,29 +3,39 @@
         <div class="top">
             <h1>UPLOAD YOUR VIDEO</h1>
         </div>
-        <form class="bottom">
+
+        <form [formGroup]="movieForm" (ngSubmit)="onSubmit()" class="bottom">
             <div class="left">
-                <input type="text" placeholder="Title">
-                <input type="text" placeholder="Genre">
-                <input type="text" placeholder="Actors">
+                <input type="text" placeholder="Title" formControlName="title">
+                <input type="text" placeholder="Genre" formControlName="genre">
+                <input type="text" placeholder="Actors" formControlName="actors">
             </div>
             <div class="right">
-                <textarea type="text" placeholder="Description"></textarea>
+                <textarea type="text" placeholder="Description" formControlName="description"></textarea>
                 <div class="row">
-                    <label for="video" class="custom-file-input">Video auswählen
-                        <input type="file" id="video" placeholder="video">
+                    <label [ngClass]="{'valid': selectedVideo }" for="video" class="custom-file-input">Video auswählen
+                        <input type="file" id="video" placeholder="video" (change)="onVideoSelected($event)">
+                        @if (selectedVideo) {
+                            <img src="assets/img/check.png" alt="">
+                            }
                     </label>
-    
-                    <label for="thumb" class="custom-file-input">Thumbnail auswählen
-                        <input type="file" id="thumb" placeholder="thumbnail">
+
+                    <label [ngClass]="{'valid': selectedThumbnail }" for="thumb" class="custom-file-input">Thumbnail auswählen
+                        <input type="file" id="thumb" placeholder="thumbnail" (change)="onThumbnailSelected($event)">
+
+                        @if (selectedThumbnail) {
+                        <img src="assets/img/check.png" alt="">
+                        }
+
                     </label>
                 </div>
-                
+
                 <div class="buttons">
-                    <button><img src="assets/img/upload.png" alt=""><span>UPLOAD</span></button>
+                    <button type="submit"><img src="assets/img/upload.png" alt=""><span>UPLOAD</span></button>
                 </div>
             </div>
-            
         </form>
+
+
     </div>
 </div>

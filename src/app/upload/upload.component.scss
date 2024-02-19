@@ -54,15 +54,23 @@ input[type='file'] {
 
 label {
     background-color: $bg-black;
+    border: 1px solid $bg-black;
+    position: relative;
     font-size: 12px;
     margin-top: 5px;
     padding: 15px 30px;
-    min-width: 100px;
+    width: 30%;
     @include center();
     border-radius: 10px;
     &:hover{
         cursor: pointer;
         opacity: 0.8 ;
+    }
+
+    img {
+        position: absolute;
+        right: 10px;
+        height: 20px;
     }
 }
 
@@ -85,6 +93,9 @@ button {
     }
 }
 
+.valid {
+    border: 1px solid $green;
+}
 
 
 textarea {

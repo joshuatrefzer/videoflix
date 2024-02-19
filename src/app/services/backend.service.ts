@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, filter } from 'rxjs';
 import { error } from 'console';
 import { Video, VideoGenre } from './interface';
+import { response } from 'express';
 
 
 @Injectable({
@@ -12,6 +13,7 @@ import { Video, VideoGenre } from './interface';
 })
 export class BackendService {
   videoUrl = environment.baseUrl + '/api/videos/';
+  uploadUrl = environment.baseUrl + '/api/upload/'
   videos: Video[] = [];
 
   constructor(private http: HttpClient) { }
@@ -47,8 +49,13 @@ export class BackendService {
 
 
 
-  uploadVideo() {
-
+  uploadVideo(videoData:FormData) {
+    this.http.post(this.uploadUrl, videoData).subscribe( response => {
+      console.log('Wurde hochgeladen');
+      
+    }, error => {
+      console.log('Schief gelaufen', error);
+    })
   }
 
 

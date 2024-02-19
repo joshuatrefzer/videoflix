@@ -4,12 +4,12 @@ export type VideoGenre = "documentation" | "blockbuster" | "comedy" | "action" |
 export interface Video {
     title: string;
     actors: string;
-    created_at: string;
+    created_at?: string;
     description: string;
     genre: VideoGenre;
-    id: number;
-    thumbnail: string;
-    video_file: string;
+    id?: number;
+    thumbnail: string | File;
+    video_file: string | File;  
 }
 
 
