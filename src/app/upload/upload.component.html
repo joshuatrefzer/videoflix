@@ -6,21 +6,44 @@
 
         <form [formGroup]="movieForm" (ngSubmit)="onSubmit()" class="bottom">
             <div class="left">
-                <input type="text" placeholder="Title" formControlName="title">
-                <input type="text" placeholder="Genre" formControlName="genre">
-                <input type="text" placeholder="Actors" formControlName="actors">
+                <input type="text" placeholder="Title" formControlName="title"
+                    [ngClass]="{'invalid': checkForValidation('title'), 'valid':!checkForValidation('title') && isDirty('title')}">
+                <div class="error-container">
+                    <div *ngIf="checkForValidation('title')" class="errors">title is required</div>
+                </div>
+
+                <input type="text" placeholder="Genre" formControlName="genre"
+                    [ngClass]="{'invalid': checkForValidation('genre'), 'valid':!checkForValidation('genre') && isDirty('genre')}">
+                <div class="error-container">
+                    <div *ngIf="checkForValidation('genre')" class="errors">genre is required</div>
+                </div>
+
+                <input type="text" placeholder="Actors" formControlName="actors"
+                    [ngClass]="{'invalid': checkForValidation('actors'), 'valid':!checkForValidation('actors') && isDirty('actors')}">
+                <div class="error-container">
+                    <div *ngIf="checkForValidation('actors')" class="errors">actors are required</div>
+                </div>
             </div>
+
             <div class="right">
-                <textarea type="text" placeholder="Description" formControlName="description"></textarea>
+                <textarea type="text" placeholder="Description" formControlName="description"
+                    [ngClass]="{'invalid': checkForValidation('description'), 'valid':!checkForValidation('description') && isDirty('description')}"></textarea>
+                <div class="error-container">
+                    <div *ngIf="checkForValidation('description')" class="errors">description is required</div>
+                </div>
+
+
+
                 <div class="row">
-                    <label [ngClass]="{'valid': selectedVideo }" for="video" class="custom-file-input">Video auswählen
+                    <label [ngClass]="{'valid': selectedVideo, 'invalid': errorVideo }" for="video" class="custom-file-input">Video auswählen
                         <input type="file" id="video" placeholder="video" (change)="onVideoSelected($event)">
                         @if (selectedVideo) {
-                            <img src="assets/img/check.png" alt="">
-                            }
+                        <img src="assets/img/check.png" alt="">
+                        }
                     </label>
 
-                    <label [ngClass]="{'valid': selectedThumbnail }" for="thumb" class="custom-file-input">Thumbnail auswählen
+                    <label [ngClass]="{'valid': selectedThumbnail , 'invalid': errorThumb }" for="thumb" class="custom-file-input">Thumbnail
+                        auswählen
                         <input type="file" id="thumb" placeholder="thumbnail" (change)="onThumbnailSelected($event)">
 
                         @if (selectedThumbnail) {
@@ -29,6 +52,15 @@
 
                     </label>
                 </div>
+
+                <div class="error-container">
+                    <span class="errors" *ngIf="errorThumb">{{ errorThumb }}</span>
+                    <span class="errors" *ngIf="errorVideo">{{ errorVideo }}</span>
+                </div>
+
+
+
+
 
                 <div class="buttons">
                     <button type="submit"><img src="assets/img/upload.png" alt=""><span>UPLOAD</span></button>

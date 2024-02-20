@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { log } from 'console';
 import { CommonModule } from '@angular/common';
 import { Video } from '../services/interface';
 import { BackendService } from '../services/backend.service';
+import { PopupService } from '../services/popup.service';
 
 @Component({
   selector: 'app-upload',
@@ -17,15 +18,17 @@ export class UploadComponent {
 
   selectedVideo: File | undefined;
   selectedThumbnail: File | undefined;
-
   movieForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private bs: BackendService) {
+  errorVideo:string | undefined;
+  errorThumb: string | undefined;
+
+  constructor(private formBuilder: FormBuilder, private bs: BackendService, public ps: PopupService) {
     this.movieForm = this.formBuilder.group({
-      title: [''],
-      genre: [''],
-      actors: [''],
-      description: ['']
+      title: ['', Validators.required],
+      genre: ['', Validators.required],
+      actors: ['', Validators.required],
+      description: ['', Validators.required]
     });
   }
 
@@ -36,9 +39,9 @@ export class UploadComponent {
 
       if (fileType === 'video/mp4') {
         this.selectedVideo = file;
+        this.errorVideo = undefined;
       } else {
-        ///TODO: Error In UI anzeigen! 
-        console.error('Bitte wählen Sie eine Video-Datei aus.');
+        this.errorVideo = "please select a valid video format (mp4, mov)";
         this.selectedVideo = undefined;
         event.target.value = null;
       }
@@ -50,9 +53,9 @@ export class UploadComponent {
     if (file) {
       if (this.checkForFormat(file)) {
         this.selectedThumbnail = file;
+        this.errorThumb = undefined;
       } else {
-        ///TODO: Error In UI anzeigen! 
-        console.error('Wählen Sie bitte eine Bild-Datei aus')
+        this.errorThumb = "please select a valid image file (jpeg, png)";
         this.selectedThumbnail = undefined;
       }
     }
@@ -73,11 +76,19 @@ export class UploadComponent {
       formData.append('thumbnail', this.selectedThumbnail);
       formData.append('video_file', this.selectedVideo);
 
-      
-      console.log(formData);
       this.bs.uploadVideo(formData);
 
     }
+  }
+
+  checkForValidation(key: string) {
+    return this.movieForm.get(key)?.invalid &&
+      (this.movieForm.get(key)?.dirty ||
+        this.movieForm.get(key)?.touched);
+  }
+
+  isDirty(key:string){
+    return this.movieForm.get(key)?.dirty;
   }
 
 }

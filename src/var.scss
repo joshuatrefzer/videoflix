@@ -35,3 +35,25 @@ $green:#57c98c;
         transition: all ease-in-out 150ms;
     }
 }
+
+.errors {
+    color: $red;
+    font-size: 12px;
+    height: 12px;
+}
+
+.error-container {
+    @include full-width($height:12px);
+    width: 90%;
+    @include center();
+}
+
+.valid {
+    border: 1px solid $green;
+    background-color: #5b7165;
+}
+
+.invalid {
+    border: 1px solid $red;
+    background-color: #a8424246;
+}
