@@ -22,9 +22,10 @@
     height: 20%;
     text-align: center
 }
+
 .bottom {
     @include full-width();
-    @include center($ai:flex-start);
+    @include center($ai: flex-start);
     height: 80%;
 }
 
@@ -42,11 +43,35 @@
     gap: 10px;
 }
 
-input {
+input,
+select,
+option {
     width: 90%;
     height: 50px;
     margin-top: 15px;
     border: 1px solid black;
+}
+
+select {
+    height: 60px;
+    width: 93%;
+}
+
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url('../../assets/img/arrow-down.png');
+    background-position: right 10px center;
+    background-repeat: no-repeat;
+    padding-right: 10px;
+    background-size: 10px;
+    background-origin: content-box;
+    background-color: $bg-black;
+
+    &:focus {
+        outline: none;
+    }
 }
 
 input[type='file'] {
@@ -63,9 +88,10 @@ label {
     width: 30%;
     @include center();
     border-radius: 10px;
-    &:hover{
+
+    &:hover {
         cursor: pointer;
-        opacity: 0.8 ;
+        opacity: 0.8;
     }
 
     img {
@@ -80,12 +106,13 @@ button {
     color: black;
     height: 50px;
     border: none;
-    font-weight:bold;
+    font-weight: bold;
     @include center();
     gap: 10px;
     margin-top: 10px;
+
     &:hover {
-        font-weight:bold;
+        font-weight: bold;
         opacity: 0.8;
     }
 
@@ -115,15 +142,31 @@ textarea:focus {
 }
 
 .row {
-    @include center($jc:space-between);
+    @include center($jc: space-between);
     width: 90%;
     padding: 5px 10px;
+    text-align: center;
 }
 
 .errors {
     font-size: 12px;
     color: $red;
-    @include full-width($height:12px);
+    @include full-width($height: 12px);
     @include center();
 }
 
+.progress-bar {
+    width: 90%;
+    height: 15px;
+    color: $green !important;
+}
+
+.mat-mdc-progress-bar {
+    --mdc-linear-progress-active-indicator-color: $green ;
+    --mdc-linear-progress-track-color: #57c98c6f;
+}
+
+.upload-percent {
+    color: #57c98c;
+    @extend .error-container;
+}

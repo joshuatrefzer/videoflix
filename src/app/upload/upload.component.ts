@@ -1,35 +1,39 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { log } from 'console';
 import { CommonModule } from '@angular/common';
-import { Video } from '../services/interface';
+import { VideoGenre, genres } from '../services/interface';
 import { BackendService } from '../services/backend.service';
 import { PopupService } from '../services/popup.service';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 @Component({
   selector: 'app-upload',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, CommonModule],
+  imports: [FormsModule, ReactiveFormsModule, CommonModule, MatProgressBarModule],
   templateUrl: './upload.component.html',
   styleUrl: './upload.component.scss'
 })
 export class UploadComponent {
-
-
   selectedVideo: File | undefined;
   selectedThumbnail: File | undefined;
   movieForm: FormGroup;
 
   errorVideo:string | undefined;
   errorThumb: string | undefined;
+  errorSubmit:string | undefined;
+  genres:VideoGenre[];
 
-  constructor(private formBuilder: FormBuilder, private bs: BackendService, public ps: PopupService) {
+  inputFinished:boolean = false;
+
+
+  constructor(private formBuilder: FormBuilder, public bs: BackendService, public ps: PopupService) {
     this.movieForm = this.formBuilder.group({
       title: ['', Validators.required],
       genre: ['', Validators.required],
       actors: ['', Validators.required],
       description: ['', Validators.required]
     });
+    this.genres = genres;
   }
 
   onVideoSelected(event: any) {
@@ -75,10 +79,22 @@ export class UploadComponent {
       formData.append('genre', this.movieForm.get('genre')?.value);
       formData.append('thumbnail', this.selectedThumbnail);
       formData.append('video_file', this.selectedVideo);
-
+      this.resetFields();
+      this.inputFinished = true;
       this.bs.uploadVideo(formData);
+      
 
+    } else {
+      this.errorSubmit = "please fill all the fields with valid data"
     }
+  }
+
+  resetFields(){
+    this.movieForm.reset();
+  }
+
+  isFormValid(){
+    return this.movieForm.valid && this.selectedThumbnail && this.selectedVideo;
   }
 
   checkForValidation(key: string) {

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpEventType, HttpProgressEvent } from '@angular/common/http';
 
 import { Observable, filter } from 'rxjs';
 import { error } from 'console';
@@ -15,6 +15,8 @@ export class BackendService {
   videoUrl = environment.baseUrl + '/api/videos/';
   uploadUrl = environment.baseUrl + '/api/upload/'
   videos: Video[] = [];
+  uploadProgress:number = 0;
+  uploadSuccessful:boolean = false;
 
   constructor(private http: HttpClient) { }
 
@@ -30,7 +32,8 @@ export class BackendService {
   }
 
   isNecessary() {
-    return this.videos.length === 0;
+    return true;
+    // return this.videos.length === 0;
   }
 
   getVideos(): Observable<Video[]> {
@@ -49,13 +52,39 @@ export class BackendService {
 
 
 
-  uploadVideo(videoData:FormData) {
-    this.http.post(this.uploadUrl, videoData).subscribe( response => {
-      console.log('Wurde hochgeladen');
+  // uploadVideo(videoData:FormData) {
+  //   this.http.post(this.uploadUrl, videoData).subscribe( response => {
+  //     console.log('Wurde hochgeladen');
       
+  //   }, error => {
+  //     console.log('Schief gelaufen', error);
+  //   })
+  // }
+
+  uploadVideo(videoData: FormData) {
+    this.http.post(this.uploadUrl, videoData, { reportProgress: true, observe: 'events' })
+    .subscribe(event => {    
+      if (event.type === 3) {
+        this.getUploadProgress(event);
+
+      } else if (event.type === HttpEventType.Response) {
+        this.uploadSuccessful = true;
+      }
+
     }, error => {
-      console.log('Schief gelaufen', error);
-    })
+      console.log('error by uploading data', error);
+    });
+  }
+
+  
+  getUploadProgress(event: HttpProgressEvent){
+    let percentDone:number;
+        if (event.total) {
+          percentDone = Math.round(100 * event.loaded / event.total);
+        } else {
+          percentDone = event.loaded;
+        }
+        this.uploadProgress = percentDone;
   }
 
 

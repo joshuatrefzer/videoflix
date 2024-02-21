@@ -44,7 +44,7 @@ body {
 
 }
 
-input {
+input , select {
     background-color: rgb(67, 67, 67);
     height: 30px;
     border-radius: 10px;
@@ -77,3 +77,5 @@ button {
         font-weight: bold;
     }
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

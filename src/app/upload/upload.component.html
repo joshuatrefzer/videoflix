@@ -4,6 +4,7 @@
             <h1>UPLOAD YOUR VIDEO</h1>
         </div>
 
+        @if (!inputFinished) {
         <form [formGroup]="movieForm" (ngSubmit)="onSubmit()" class="bottom">
             <div class="left">
                 <input type="text" placeholder="Title" formControlName="title"
@@ -12,16 +13,28 @@
                     <div *ngIf="checkForValidation('title')" class="errors">title is required</div>
                 </div>
 
-                <input type="text" placeholder="Genre" formControlName="genre"
+                <!-- <input type="text" placeholder="Genre" formControlName="genre"
                     [ngClass]="{'invalid': checkForValidation('genre'), 'valid':!checkForValidation('genre') && isDirty('genre')}">
                 <div class="error-container">
                     <div *ngIf="checkForValidation('genre')" class="errors">genre is required</div>
-                </div>
+                </div> -->
+
+
 
                 <input type="text" placeholder="Actors" formControlName="actors"
                     [ngClass]="{'invalid': checkForValidation('actors'), 'valid':!checkForValidation('actors') && isDirty('actors')}">
                 <div class="error-container">
                     <div *ngIf="checkForValidation('actors')" class="errors">actors are required</div>
+                </div>
+
+                <select formControlName="genre"
+                    [ngClass]="{'invalid': checkForValidation('genre'), 'valid': !checkForValidation('genre') && isDirty('genre')}">
+                    <option value="" disabled>select genre</option>
+                    <option *ngFor="let genre of genres" [value]="genre">{{ genre }}</option>
+                </select>
+
+                <div class="error-container">
+                    <div *ngIf="checkForValidation('genre')" class="errors">Genre is required</div>
                 </div>
             </div>
 
@@ -35,14 +48,16 @@
 
 
                 <div class="row">
-                    <label [ngClass]="{'valid': selectedVideo, 'invalid': errorVideo }" for="video" class="custom-file-input">Video auswählen
+                    <label [ngClass]="{'valid': selectedVideo, 'invalid': errorVideo }" for="video"
+                        class="custom-file-input">Video auswählen
                         <input type="file" id="video" placeholder="video" (change)="onVideoSelected($event)">
                         @if (selectedVideo) {
                         <img src="assets/img/check.png" alt="">
                         }
                     </label>
 
-                    <label [ngClass]="{'valid': selectedThumbnail , 'invalid': errorThumb }" for="thumb" class="custom-file-input">Thumbnail
+                    <label [ngClass]="{'valid': selectedThumbnail , 'invalid': errorThumb }" for="thumb"
+                        class="custom-file-input">Thumbnail
                         auswählen
                         <input type="file" id="thumb" placeholder="thumbnail" (change)="onThumbnailSelected($event)">
 
@@ -63,10 +78,20 @@
 
 
                 <div class="buttons">
-                    <button type="submit"><img src="assets/img/upload.png" alt=""><span>UPLOAD</span></button>
+                    <button [ngClass]="{'invalid': errorSubmit, 'valid-form-button':isFormValid()}" type="submit"><img
+                            src="assets/img/upload.png" alt=""><span>UPLOAD</span></button>
                 </div>
+
+                <div class="error-container"><span *ngIf="errorSubmit" class="errors">{{ errorSubmit }}</span></div>
             </div>
         </form>
+        } @else if (inputFinished) {
+
+        <mat-progress-bar class="progress-bar" mode="determinate" value="{{ bs.uploadProgress }}"></mat-progress-bar>
+        <div class="upload-percent">{{ bs.uploadProgress }}%</div>
+        }
+
+
 
 
     </div>

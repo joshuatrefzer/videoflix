@@ -28,7 +28,6 @@ export class HomescreenComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //LOADER TODO
     this.backend.fetchVideoData();
 
   }
