@@ -37,15 +37,17 @@ $green:#57c98c;
 }
 
 .errors {
-    color: $red;
     font-size: 12px;
-    height: 12px;
+    color: $red;
+    @include full-width($height: 12px);
+    @include center();
 }
 
 .error-container {
     @include full-width($height:12px);
     width: 90%;
     @include center();
+    margin-top: 5px;
 }
 
 .valid {

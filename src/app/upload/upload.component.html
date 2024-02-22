@@ -13,14 +13,6 @@
                     <div *ngIf="checkForValidation('title')" class="errors">title is required</div>
                 </div>
 
-                <!-- <input type="text" placeholder="Genre" formControlName="genre"
-                    [ngClass]="{'invalid': checkForValidation('genre'), 'valid':!checkForValidation('genre') && isDirty('genre')}">
-                <div class="error-container">
-                    <div *ngIf="checkForValidation('genre')" class="errors">genre is required</div>
-                </div> -->
-
-
-
                 <input type="text" placeholder="Actors" formControlName="actors"
                     [ngClass]="{'invalid': checkForValidation('actors'), 'valid':!checkForValidation('actors') && isDirty('actors')}">
                 <div class="error-container">

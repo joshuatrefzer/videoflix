@@ -80,7 +80,6 @@ export class UploadComponent {
       formData.append('thumbnail', this.selectedThumbnail);
       formData.append('video_file', this.selectedVideo);
       this.resetFields();
-      this.inputFinished = true;
       this.bs.uploadVideo(formData);
       
 
@@ -91,6 +90,7 @@ export class UploadComponent {
 
   resetFields(){
     this.movieForm.reset();
+    this.inputFinished = true;
   }
 
   isFormValid(){

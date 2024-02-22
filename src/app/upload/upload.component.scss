@@ -148,13 +148,6 @@ textarea:focus {
     text-align: center;
 }
 
-.errors {
-    font-size: 12px;
-    color: $red;
-    @include full-width($height: 12px);
-    @include center();
-}
-
 .progress-bar {
     width: 90%;
     height: 15px;

@@ -5,7 +5,8 @@ import { HttpClient, HttpEventType, HttpProgressEvent } from '@angular/common/ht
 import { Observable, filter } from 'rxjs';
 import { error } from 'console';
 import { Video, VideoGenre } from './interface';
-import { response } from 'express';
+import { Router } from '@angular/router';
+
 
 
 @Injectable({
@@ -15,10 +16,10 @@ export class BackendService {
   videoUrl = environment.baseUrl + '/api/videos/';
   uploadUrl = environment.baseUrl + '/api/upload/'
   videos: Video[] = [];
-  uploadProgress:number = 0;
-  uploadSuccessful:boolean = false;
+  uploadProgress: number = 0;
+  uploadSuccessful: boolean = false;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   fetchVideoData() {
     if (this.isNecessary()) {
@@ -51,41 +52,41 @@ export class BackendService {
   }
 
 
-
-  // uploadVideo(videoData:FormData) {
-  //   this.http.post(this.uploadUrl, videoData).subscribe( response => {
-  //     console.log('Wurde hochgeladen');
-      
-  //   }, error => {
-  //     console.log('Schief gelaufen', error);
-  //   })
-  // }
-
   uploadVideo(videoData: FormData) {
     this.http.post(this.uploadUrl, videoData, { reportProgress: true, observe: 'events' })
-    .subscribe(event => {    
-      if (event.type === 3) {
-        this.getUploadProgress(event);
+      .subscribe(event => {
+        if (event.type === 3) {
+          this.getUploadProgress(event);
 
-      } else if (event.type === HttpEventType.Response) {
-        this.uploadSuccessful = true;
-      }
-
-    }, error => {
-      console.log('error by uploading data', error);
-    });
-  }
-
-  
-  getUploadProgress(event: HttpProgressEvent){
-    let percentDone:number;
-        if (event.total) {
-          percentDone = Math.round(100 * event.loaded / event.total);
-        } else {
-          percentDone = event.loaded;
+        } else if (event.type === HttpEventType.Response) {
+          this.finishUpload();
         }
-        this.uploadProgress = percentDone;
+
+      }, error => {
+        console.log('error by uploading data', error);
+      });
   }
+
+
+  getUploadProgress(event: HttpProgressEvent) {
+    let percentDone: number;
+    if (event.total) {
+      percentDone = Math.round(100 * event.loaded / event.total);
+    } else {
+      percentDone = event.loaded;
+
+    }
+    this.uploadProgress = percentDone;
+  }
+
+  finishUpload() {
+    setTimeout(() => {
+      this.uploadSuccessful = true;
+      this.router.navigate(['/home']);
+    }, 1500);
+  }
+
+
 
 
 
