@@ -2,68 +2,72 @@
 
     @if(directTo == 'login') {
 
-    <form [formGroup]="loginForm" class="login">
+    <form [formGroup]="loginForm" class="login" (ngSubmit)="logIn()">
         <h1>LOGIN</h1>
         <input placeholder="e-mail..." type="email" formControlName="email"
             [ngClass]="{'invalid': checkForValidation('email'), 'valid': emailIsValid('email') }">
         <div class="error-container">
             <div *ngIf="checkForValidation('email')" class="errors">email is required</div>
-            <div *ngIf="!emailIsValid('email') && loginForm.get('email')?.value.length > 4" class="errors">please use a valid email</div>
+            <div *ngIf="!emailIsValid('email') && loginForm.get('email')?.value?.length > 4" class="errors">please use a
+                valid email</div>
         </div>
 
 
         <input placeholder="password..." type="password" formControlName="password"
-            [ngClass]="{'invalid': checkForValidation('password')}">
+            [ngClass]="{'invalid': checkForValidation('password'), 'valid': checkForLength('password' , 5)}">
         <div class="error-container">
             <div *ngIf="checkForValidation('password')" class="errors">password is required</div>
         </div>
 
 
 
-        <div class="question">Do you haven't registered yet? Please click <a (click)="directTo = 'signUp'; ">here</a> to
+        <div class="question">Do you haven't registered yet? Please click <a (click)="direct('signUp'); ">here</a> to
             sign up.</div>
-        <button (click)="logIn()">LOGIN</button>
+        <button [ngClass]="{'valid-form-button': loginForm.valid}" type="submit">LOGIN</button>
     </form>
 
     }
 
 
     @else if(directTo == 'signUp'){
+        @if (!this.as.mailSendFeedback) {
 
-    <form class="login" [formGroup]="signUpForm">
-        <h1>SIGN UP</h1>
-        <input placeholder="firstname" type="text" formControlName="firstname"
-            [ngClass]="{'invalid': checkForValidation('firstname')}">
-        <input placeholder="lastname" type="text" formControlName="lastname"
-            [ngClass]="{'invalid': checkForValidation('lastname')}">
-        <input placeholder="e-mail" type="email" formControlName="email"
-            [ngClass]="{'invalid': checkForValidation('email')}">
-        <input placeholder="set password" type="password" formControlName="password"
-            [ngClass]="{'invalid': checkForValidation('password')}">
-        <input placeholder="repeat password" type="password" formControlName="repeatpassword"
-            [ngClass]="{'invalid': checkForValidation('password')}">
-        <div class="question">Do you have registered already? Please click <a (click)="directTo = 'login'; ">here</a> to
-            log in.</div>
-        <button>SIGN UP</button>
-    </form>
+        <form class="login" [formGroup]="signUpForm" (ngSubmit)="signUp()">
+            <h1>SIGN UP</h1>
+            <input placeholder="firstname" type="text" formControlName="firstname"
+                [ngClass]="{'invalid': checkForValidation('firstname'), 'valid': checkForLength('firstname' , 5) }">
+
+            <input placeholder="lastname" type="text" formControlName="lastname"
+                [ngClass]="{'invalid': checkForValidation('lastname'), 'valid': checkForLength('lastname' , 5)}">
+
+            <input placeholder="e-mail" type="email" formControlName="email"
+                [ngClass]="{'invalid': checkForValidation('email'), 'valid': emailIsValid('email')}">
+
+            <input placeholder="set password" type="password" formControlName="password"
+                [ngClass]="{'invalid': checkForValidation('password'), 'valid': checkForLength('password' , 5)}">
+
+            <input placeholder="repeat password" type="password" formControlName="repeatpassword"
+                [ngClass]="{'invalid': checkForValidation('repeatpassword'), 'valid': passwordRepeat('repeatpassword' , 'password') }">
+
+            <div class="question">Do you have registered already? Please click <a (click)="direct('login'); ">here</a> to
+                log in.</div>
+            <button type="submit" [ngClass]="{'valid-form-button': isFormValid() }">SIGN UP</button>
+        </form>
+
+        } @else {
+            <div class="login">
+                <span class="message">
+                    We have sent a confirmation mail! Please check your mail to verify your account.
+                </span>
+                <button (click)="redirect()" >Back to Login</button>
+
+                
+            </div>
+        }
 
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    <app-loader class="full-screen" *ngIf="this.as.loader"></app-loader>
 
 </div>

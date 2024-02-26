@@ -23,9 +23,26 @@ $green:#57c98c;
     margin: $margin;
 }
 
+.full-screen {
+    min-width: 100vw;
+    max-width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100;
+}
+
 .row {
     width: 100%;
     @include center($jc:flex-start);
+}
+
+.popup {
+    width: 50%;
+    height: 50%;
+    @include center-column($jc:center);
 }
 
 .text-button {

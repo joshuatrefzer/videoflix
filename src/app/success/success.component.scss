@@ -1,0 +1,17 @@
+@import "../../var.scss";
+
+.full-screen {
+    @include center();
+    font-size: 20px;
+    font-weight: 300;
+}
+
+span {
+    color: $red;
+    font-weight: bold;
+}
+
+.row {
+    @include center();
+    margin-top: 20px;
+}
