@@ -2,6 +2,7 @@ $red:#e50815;
 $bg-black:rgb(23, 23, 23);
 $font: sans-serif;
 $green:#57c98c;
+$header-height: 80px;
 
 @mixin center($display:flex , $jc:center , $ai:center){
     display: $display;

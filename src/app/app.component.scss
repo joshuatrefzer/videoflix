@@ -30,3 +30,72 @@
 .popup {
     z-index: 200;
 }
+
+.logout {
+    animation: slide-in ease-in-out 300ms;
+    z-index: 200;
+    position: absolute;
+    top: $header-height;
+    right: 0;
+    background-color: rgb(37, 36, 36);
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    box-shadow: 1px 1px 10px black;
+    
+    span {
+        margin-top: 20px;
+        width: 150px;
+        background-color: $bg-black;
+        text-align: center;
+        padding: 5px;
+        border-radius: 20px;
+        box-shadow: 1px 1px 10px black;
+    }
+    .row {
+        justify-content: center;
+        font-size: 15px;
+    }
+}
+
+.error-popup {
+    animation: error-slide ease-in-out 300ms;
+    position: absolute;
+    left: 50%;
+    top:50%;
+    transform: translate(-50%, -50%);
+    padding: 30px;
+    border-radius: 20px;
+    background-color: $bg-black;
+    color: red;
+    font-size: 20px;
+    font-weight: 300;
+    z-index: 200;
+    border: 2px white solid;
+}
+
+@keyframes error-slide {
+    0% {
+        transform: translate(-50%, 200%);
+        opacity: 0.5;
+    }
+
+    100% {
+        transform: translate(-50%, -50%);
+        opacity: 1;
+    }
+}
+
+
+
+@keyframes slide-in {
+    0% {
+        transform: translateX(100%);
+    }
+
+    100%{
+        transform: translateX(0%);
+    }
+}

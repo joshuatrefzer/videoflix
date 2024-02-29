@@ -13,6 +13,7 @@ import { PopupService } from '../services/popup.service';
   templateUrl: './auth.component.html',
   styleUrl: './auth.component.scss'
 })
+
 export class AuthComponent {
 
   directTo: "signUp" | "login" = "login";
@@ -36,13 +37,9 @@ export class AuthComponent {
 
   logIn() {
     const userData = new FormData();
-    userData.append('email' , this.signUpForm.get('email')?.value);
-    userData.append('password' , this.signUpForm.get('password')?.value);
-
+    userData.append('email' , this.loginForm.get('email')?.value);
+    userData.append('password' , this.loginForm.get('password')?.value);
     this.as.login(userData);
-
-    // this.as.userisLoggedIn = true;
-    this.router.navigate(['/home'])
   }
 
   signUp(){
@@ -57,8 +54,6 @@ export class AuthComponent {
     }
     
   }
-
-
 
 
   direct(key:"signUp" | "login"){

@@ -7,27 +7,40 @@ import { AuthService } from './services/auth.service';
 import { PopupService } from './services/popup.service';
 import { VideoDetailComponent } from './video-detail/video-detail.component';
 import { environment } from '../environments/environment.development';
+import { LoaderComponent } from './loader/loader.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
-  imports: [CommonModule, RouterOutlet, HeaderComponent, VideoComponent, VideoDetailComponent]
+  imports: [CommonModule, RouterOutlet, HeaderComponent, VideoComponent, VideoDetailComponent, LoaderComponent]
 })
 export class AppComponent {
   title = 'videoflix';
 
-  constructor(public authService: AuthService, private router: Router, public popup: PopupService) {
-    // console.log(this.router);
 
-    // if (!this.authService.userisLoggedIn) {
-    //   this.redirectToAuth();
-    // }
+  constructor(public authService: AuthService, private router: Router, public popup: PopupService) {
+
+    if (this.userIsLoggedIn()) {
+      this.authService.userisLoggedIn = true;
+      this.router.navigate(['/home']);
+    } else {
+      this.redirectToAuth();
+    }
+  }
+
+
+  userIsLoggedIn(){
+    if (this.authService.isUserLoggedIn()) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   redirectToAuth() {
-    this.router.navigate(['/authentication'])
+    this.router.navigate(['/authentication']);
   }
 
 

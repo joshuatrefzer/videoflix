@@ -11,6 +11,19 @@ header {
     @include center($jc:space-between);
 }
 
+.user {
+    border-radius: 100%;
+    height: 45px;
+    width: 45px;
+    border: 2px solid white;
+    background-color: $bg-black;
+    @include center();
+    img {
+        height: 20px;
+    }
+    @extend .text-button;
+}
+
 
 .right {
     @include full-width($padding: 10px);

@@ -9,9 +9,21 @@
 </div>
 
 @if (popup.bg) {
-    <div class="popup-bg" (click)="popup.closePopups()"></div>
+<div class="popup-bg" (click)="popup.closePopups()"></div>
 }
 
 @if (popup.videoDetail && popup.bg) {
-    <app-video-detail class="popup"></app-video-detail>
+<app-video-detail class="popup"></app-video-detail>
 }
+
+<div *ngIf="popup.userPopup" class="logout">
+    <div class="row"><span class="text-button">legal notice</span></div>
+    <div class="row"><span (click)="authService.deleteUser()" class="text-button">delete account</span></div>
+    <div class="row">
+        <span (click)="authService.logOut(); this.popup.closePopups()" class="text-button">log out</span>
+    </div>
+</div>
+
+<app-loader class="full-screen" *ngIf="this.authService.loader"></app-loader>
+
+<div *ngIf="popup.errorMessage" class="error-popup">{{ popup.errorMessage }}</div>
