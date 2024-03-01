@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { VideoGenre, genres } from '../services/interface';
 import { BackendService } from '../services/backend.service';
 import { PopupService } from '../services/popup.service';
-import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @Component({
   selector: 'app-upload',
@@ -18,20 +18,20 @@ export class UploadComponent {
   selectedThumbnail: File | undefined;
   movieForm: FormGroup;
 
-  errorVideo:string | undefined;
+  errorVideo: string | undefined;
   errorThumb: string | undefined;
-  errorSubmit:string | undefined;
-  genres:VideoGenre[];
+  errorSubmit: string | undefined;
+  genres: VideoGenre[];
 
-  inputFinished:boolean = false;
+  inputFinished: boolean = false;
 
 
   constructor(private formBuilder: FormBuilder, public bs: BackendService, public ps: PopupService) {
-    this.movieForm = this.formBuilder.group({
-      title: ['', Validators.required],
-      genre: ['', Validators.required],
-      actors: ['', Validators.required],
-      description: ['', Validators.required]
+    this.movieForm = new FormGroup({
+      title: new FormControl('', [Validators.required, Validators.minLength(4)]),
+      genre: new FormControl('', [Validators.required]),
+      actors: new FormControl('', [Validators.required, Validators.minLength(4)]),
+      description: new FormControl('', [Validators.required, Validators.minLength(15)]),
     });
     this.genres = genres;
   }
@@ -71,7 +71,7 @@ export class UploadComponent {
 
 
   onSubmit() {
-    if (this.selectedThumbnail && this.selectedVideo) {
+    if (this.selectedThumbnail && this.selectedVideo && this.isFormValid()) {
       const formData = new FormData();
       formData.append('title', this.movieForm.get('title')?.value);
       formData.append('actors', this.movieForm.get('actors')?.value);
@@ -81,30 +81,72 @@ export class UploadComponent {
       formData.append('video_file', this.selectedVideo);
       this.resetFields();
       this.bs.uploadVideo(formData);
-      
-
     } else {
-      this.errorSubmit = "please fill all the fields with valid data"
+      this.ps.errorPopup('Please fill all fields with valid data. Do you use the right video and image formats?');
     }
   }
 
-  resetFields(){
+
+  isFormValid() {
+    return this.movieForm.valid && this.selectedThumbnail && this.selectedVideo;
+  }
+
+  resetFields() {
     this.movieForm.reset();
     this.inputFinished = true;
   }
 
-  isFormValid(){
-    return this.movieForm.valid && this.selectedThumbnail && this.selectedVideo;
+
+  getField(key: string) {
+    let myForm = this.movieForm;
+    let field = myForm?.get(key);
+    return field;
   }
 
-  checkForValidation(key: string) {
-    return this.movieForm.get(key)?.invalid &&
-      (this.movieForm.get(key)?.dirty ||
-        this.movieForm.get(key)?.touched);
+  dirtyTouched(field: any) {
+    return (field.dirty ||
+      field.touched);
   }
 
-  isDirty(key:string){
-    return this.movieForm.get(key)?.dirty;
+  isInvalid(key: string) {
+    const field = this.getField(key);
+    if (field) {
+      return field.invalid &&
+        this.dirtyTouched(field);
+    } else {
+      return false;
+    }
+  }
+
+
+  isValidInput(key: string) {
+    const field = this.getField(key);
+    if (field) {
+      return !this.isInvalid(key) && field.valid;
+    } else {
+      return false;
+    }
+  }
+
+
+  requiredErrors(key: string) {
+    const field = this.getField(key);
+    if (field) {
+      return field.errors?.['required'] &&
+        this.dirtyTouched(field);
+    } else {
+      return false;
+    }
+  }
+
+
+  minLengthError(key: string) {
+    const field = this.getField(key);
+    if (field) {
+      return field.errors?.['minlength'];
+    } else {
+      return false;
+    }
   }
 
 }

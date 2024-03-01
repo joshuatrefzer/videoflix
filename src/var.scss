@@ -1,23 +1,23 @@
-$red:#e50815;
-$bg-black:rgb(23, 23, 23);
+$red: #e50815;
+$bg-black: rgb(23, 23, 23);
 $font: sans-serif;
-$green:#57c98c;
+$green: #57c98c;
 $header-height: 80px;
 
-@mixin center($display:flex , $jc:center , $ai:center){
+@mixin center($display: flex, $jc: center, $ai: center) {
     display: $display;
     justify-content: $jc;
     align-items: $ai;
 }
 
-@mixin center-column($display:flex , $jc:flex-start , $ai:center , $fd:column ){
+@mixin center-column($display: flex, $jc: flex-start, $ai: center, $fd: column) {
     display: $display;
     justify-content: $jc;
     align-items: $ai;
     flex-direction: $fd;
 }
 
-@mixin full-width($padding: 0px , $margin: 0px, $height: 50px ){
+@mixin full-width($padding: 0px, $margin: 0px, $height: 50px) {
     width: calc(100% - (2 * $padding) - (2 * $margin));
     height: $height;
     padding: $padding;
@@ -37,13 +37,13 @@ $header-height: 80px;
 
 .row {
     width: 100%;
-    @include center($jc:flex-start);
+    @include center($jc: flex-start);
 }
 
 .popup {
     width: 50%;
     height: 50%;
-    @include center-column($jc:center);
+    @include center-column($jc: center);
 }
 
 .text-button {
@@ -62,7 +62,7 @@ $header-height: 80px;
 }
 
 .error-container {
-    @include full-width($height:12px);
+    @include full-width($height: 12px);
     width: 90%;
     @include center();
     margin-top: 5px;
@@ -80,21 +80,27 @@ $header-height: 80px;
 
 .valid-form-button {
     animation: pulse 2s infinite;
+    &:hover{
+        background-color: #57c98c;
+        color: black;
+        opacity: 1;
+        animation: pulse 2s ease-in;
+    }
 }
 
 @keyframes pulse {
     0% {
-      transform: scale(1);
-      opacity: 0.9;
+        background-color: rgb(118, 118, 118);
+        opacity: 0.9;
     }
-    
+
     50% {
-      transform: scale(1.1);
-      opacity: 1;
+        background-color: #698f7b;
+        opacity: 1;
     }
 
     100% {
-      transform: scale(1);
-      opacity: 0.9;
+        background-color: rgb(92, 90, 90);
+        opacity: 0.9;
     }
-  }
+}

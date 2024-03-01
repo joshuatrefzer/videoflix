@@ -1,10 +1,11 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import {FormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-searchbar',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule , CommonModule],
   templateUrl: './searchbar.component.html',
   styleUrl: './searchbar.component.scss',
 })
@@ -13,7 +14,7 @@ export class SearchbarComponent {
   isSearchExpanded = false;
   hide:boolean = false;
   count:number = 0;
-  searchValue: any;
+  searchValue: string = '';
 
 
   toggleSearch() {
@@ -40,11 +41,12 @@ export class SearchbarComponent {
       this.count = 0; // Setzt den Zähler zurück
     }, 300);
   }
+
   startSearch() {
-    console.log(this.count);
+    console.log(this.searchValue);
     
     this.count = 0;
-    console.log('Starte die Suche mit dem eingegebenen Wert');
+
   }
 
 

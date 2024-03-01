@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { LoaderComponent } from '../loader/loader.component';
 import { PopupService } from '../services/popup.service';
@@ -21,42 +21,49 @@ export class AuthComponent {
   signUpForm: FormGroup;
 
   constructor(public as: AuthService, private router: Router, private formBuilder: FormBuilder, public ps: PopupService) {
-    this.loginForm = this.formBuilder.group({
-      email: ['', Validators.required],
-      password: ['', Validators.required],
+    this.loginForm = new FormGroup({
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [Validators.required, Validators.minLength(5)])
     });
 
-    this.signUpForm = this.formBuilder.group({
-      firstname: ['', Validators.required],
-      lastname: ['', Validators.required],
-      email: ['', Validators.required],
-      password: ['', Validators.required],
-      repeatpassword: ['', Validators.required],
+    this.signUpForm = new FormGroup({
+      firstname: new FormControl('', [Validators.required, Validators.minLength(4)],),
+      lastname: new FormControl('', [Validators.required, Validators.minLength(4)],),
+      email: new FormControl('', [Validators.required, Validators.email],),
+      password: new FormControl('', [Validators.required, Validators.minLength(8)],),
+      repeatpassword: new FormControl('', [Validators.required, Validators.minLength(8)],),
     });
   }
 
   logIn() {
-    const userData = new FormData();
-    userData.append('email' , this.loginForm.get('email')?.value);
-    userData.append('password' , this.loginForm.get('password')?.value);
-    this.as.login(userData);
+    if (this.loginForm.valid) {
+      const userData = new FormData();
+      userData.append('email', this.loginForm.get('email')?.value);
+      userData.append('password', this.loginForm.get('password')?.value);
+      this.as.login(userData);
+    } else {
+      this.ps.errorPopup('please fill all fields with valid data');
+    }
+
   }
 
-  signUp(){
+  signUp() {
     if (this.signUpForm.valid) {
       const formData = new FormData();
-      formData.append('first_name' , this.signUpForm.get('firstname')?.value);
-      formData.append('last_name' , this.signUpForm.get('lastname')?.value);
-      formData.append('email' , this.signUpForm.get('email')?.value);
-      formData.append('password' , this.signUpForm.get('password')?.value);
+      formData.append('first_name', this.signUpForm.get('firstname')?.value);
+      formData.append('last_name', this.signUpForm.get('lastname')?.value);
+      formData.append('email', this.signUpForm.get('email')?.value);
+      formData.append('password', this.signUpForm.get('password')?.value);
 
       this.as.signUp(formData);
+    } else {
+      this.ps.errorPopup('please fill all fields with valid data');
     }
-    
+
   }
 
 
-  direct(key:"signUp" | "login"){
+  direct(key: "signUp" | "login") {
     this.directTo = key;
     this.loginForm.reset();
     this.signUpForm.reset();
@@ -64,48 +71,81 @@ export class AuthComponent {
 
 
 
-  // ******  FORM VALIDATION ******
 
+  // ******  FORM VALIDATION ******
   isFormValid() {
-    const myForm = this.whichFormToUse()
+    const myForm = this.whichFormToUse();
     return myForm?.valid;
   }
 
-  checkForValidation(key: string) {
-    let myForm = this.whichFormToUse();
-    return myForm?.get(key)?.invalid &&
-      (myForm.get(key)?.dirty ||
-        myForm.get(key)?.touched);
-  }
-
-  checkForLength(key:string , length:number){
-    let myForm = this.whichFormToUse();
-    const currentField = myForm?.get(key)?.value;
-    if (currentField) {
-      return currentField.length > length;
+  emailError(key: string) {
+    const field = this.getField(key);
+    if (field) {
+      return field.errors?.['email'] && this.dirtyTouched(field);
     }
-    return;
   }
 
-  emailIsValid(key: string): boolean {
-    const form = this.whichFormToUse();
-    const email = form?.get(key)?.value;
-  
-      if (!email) return false;
-      const basicFormatRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!basicFormatRegex.test(email)) return false;
-      return true;
+  getField(key: string) {
+    let myForm = this.whichFormToUse();
+    let field = myForm?.get(key);
+    return field;
   }
 
-  passwordRepeat(repeat:string , pw:string){
-    const repeatedPW= this.signUpForm.get(repeat)?.value;
-    const password= this.signUpForm.get(pw)?.value;
-    if (repeatedPW && password) {
-      return repeatedPW === password && password.length > 5;
+  dirtyTouched(field: any) {
+    return (field.dirty ||
+      field.touched);
+  }
+
+  isInvalid(key: string) {
+    const field = this.getField(key);
+    if (field) {
+      return field.invalid &&
+        this.dirtyTouched(field);
     } else {
-      return;
+      return false;
     }
-    
+  }
+
+
+  isValidInput(key: string) {
+    const field = this.getField(key);
+    if (field) {
+      return !this.isInvalid(key) && field.valid;
+    } else {
+      return false;
+    }
+  }
+
+
+  requiredErrors(key: string) {
+    const field = this.getField(key);
+    if (field) {
+      return field.errors?.['required'] &&
+        this.dirtyTouched(field);
+    } else {
+      return false;
+    }
+  }
+
+
+  minLengthError(key: string) {
+    const field = this.getField(key);
+    if (field) {
+      return field.errors?.['minlength'];
+    } else {
+      return false;
+    }
+  }
+
+
+  passwordRepeat(repeat: string, pw: string) {
+    const repeatedPW = this.signUpForm.get(repeat)?.value;
+    const password = this.signUpForm.get(pw)?.value;
+    if (repeatedPW && password) {
+      return repeatedPW === password && repeatedPW.length > 1;
+    } else {
+      return false;
+    }
   }
 
   whichFormToUse() {
@@ -118,11 +158,8 @@ export class AuthComponent {
     return myform;
   }
 
-  isDirty(key: string) {
-    return this.loginForm.get(key)?.dirty;
-  }
 
-  redirect(){
+  redirect() {
     this.as.mailSendFeedback = false;
     this.directTo = 'login';
   }

@@ -42,7 +42,9 @@ export class AuthService {
         this.mailSendFeedback = true;
       }
     }, error => {
-      console.log('registration failed', error);
+      if(error.status === 404) 
+      this.ps.errorPopup('No valid data, please fill every field with correct data');
+      this.loader = false;
     });
   }
 
@@ -59,7 +61,7 @@ export class AuthService {
       }
     }, error => {
       if(error.status === 404) 
-      this.ps.errorPopup('wrong password or email. Do you have already an account?');
+      this.ps.errorPopup('Wrong password or email. Do you have already an account?');
       this.loader = false;
     });
   }

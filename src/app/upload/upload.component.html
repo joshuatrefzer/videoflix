@@ -8,33 +8,37 @@
         <form [formGroup]="movieForm" (ngSubmit)="onSubmit()" class="bottom">
             <div class="left">
                 <input type="text" placeholder="Title" formControlName="title"
-                    [ngClass]="{'invalid': checkForValidation('title'), 'valid':!checkForValidation('title') && isDirty('title')}">
+                    [ngClass]="{'invalid': isInvalid('title'), 'valid':isValidInput('title')}">
                 <div class="error-container">
-                    <div *ngIf="checkForValidation('title')" class="errors">title is required</div>
+                    <div *ngIf="requiredErrors('title')" class="errors">title is required</div>
+                    <div *ngIf="minLengthError('title')" class="errors">title must have a minimum of 4 character</div>
                 </div>
 
                 <input type="text" placeholder="Actors" formControlName="actors"
-                    [ngClass]="{'invalid': checkForValidation('actors'), 'valid':!checkForValidation('actors') && isDirty('actors')}">
+                    [ngClass]="{'invalid': isInvalid('actors'), 'valid':isValidInput('actors')}">
                 <div class="error-container">
-                    <div *ngIf="checkForValidation('actors')" class="errors">actors are required</div>
+                    <div *ngIf="requiredErrors('actors')" class="errors">actors are required</div>
+                    <div *ngIf="minLengthError('actors')" class="errors">actors must have a minimum of 4 character</div>
                 </div>
 
                 <select formControlName="genre"
-                    [ngClass]="{'invalid': checkForValidation('genre'), 'valid': !checkForValidation('genre') && isDirty('genre')}">
+                    [ngClass]="{'invalid': isInvalid('genre'), 'valid':isValidInput('genre')}">
                     <option value="" disabled>select genre</option>
                     <option *ngFor="let genre of genres" [value]="genre">{{ genre }}</option>
                 </select>
 
                 <div class="error-container">
-                    <div *ngIf="checkForValidation('genre')" class="errors">Genre is required</div>
+                    <div *ngIf="requiredErrors('genre')" class="errors">title is required</div>
                 </div>
             </div>
 
             <div class="right">
                 <textarea type="text" placeholder="Description" formControlName="description"
-                    [ngClass]="{'invalid': checkForValidation('description'), 'valid':!checkForValidation('description') && isDirty('description')}"></textarea>
+                    [ngClass]="{'invalid': isInvalid('description'), 'valid':isValidInput('description')}"></textarea>
                 <div class="error-container">
-                    <div *ngIf="checkForValidation('description')" class="errors">description is required</div>
+                    <div *ngIf="requiredErrors('description')" class="errors">description is required</div>
+                    <div *ngIf="minLengthError('description')" class="errors">your description must have a minimum of 15
+                        character</div>
                 </div>
 
 
@@ -43,20 +47,12 @@
                     <label [ngClass]="{'valid': selectedVideo, 'invalid': errorVideo }" for="video"
                         class="custom-file-input">Video auswählen
                         <input type="file" id="video" placeholder="video" (change)="onVideoSelected($event)">
-                        @if (selectedVideo) {
-                        <img src="assets/img/check.png" alt="">
-                        }
                     </label>
 
                     <label [ngClass]="{'valid': selectedThumbnail , 'invalid': errorThumb }" for="thumb"
                         class="custom-file-input">Thumbnail
                         auswählen
                         <input type="file" id="thumb" placeholder="thumbnail" (change)="onThumbnailSelected($event)">
-
-                        @if (selectedThumbnail) {
-                        <img src="assets/img/check.png" alt="">
-                        }
-
                     </label>
                 </div>
 

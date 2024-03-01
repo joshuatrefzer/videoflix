@@ -20,7 +20,7 @@ export class BackendService {
   uploadSuccessful: boolean = false;
 
   constructor(private http: HttpClient, private router: Router) { }
-
+  
   fetchVideoData() {
     if (this.isNecessary()) {
       this.getVideos().subscribe((data: Video[]) => {
@@ -28,7 +28,7 @@ export class BackendService {
         console.log(this.videos);
       }, error => {
         console.log('Error by loading data from backend');
-      })
+      });
     }
   }
 
