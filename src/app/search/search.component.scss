@@ -1,0 +1,31 @@
+@import "../../var.scss";
+$feedback-height:100px;
+
+.feedback {
+    @include full-width($height:$feedback-height);
+    @include center();
+    font-size: 15px;
+    font-weight: 300;
+
+    span {
+        color: $red;
+        font-weight: bold;
+    }
+}
+
+.container {
+    @extend .full-site;
+    height: 100%;
+    margin: 20px;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+app-video {
+    height: fit-content;
+    width: fit-content;
+}
+
+

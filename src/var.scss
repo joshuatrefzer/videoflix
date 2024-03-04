@@ -35,6 +35,12 @@ $header-height: 80px;
     z-index: 100;
 }
 
+.full-site {
+    @extend .full-screen;
+    top: $header-height;
+    height: calc(100vh - $header-height);
+}
+
 .row {
     width: 100%;
     @include center($jc: flex-start);

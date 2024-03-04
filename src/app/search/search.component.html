@@ -1,0 +1,10 @@
+<div class="full-site">
+    <div class="feedback" *ngIf="searchService.searchResult.length >= 1">Here are the results for your search &nbsp;<span>"{{ searchService.value }}"</span></div>
+    <div class="feedback" *ngIf="searchService.searchResult.length < 1">There are no videos for your search  &nbsp;<span>"{{ searchService.value }}"</span></div>
+
+    <div class="container">
+        @for (video of searchService.searchResult; track $index) {
+        <app-video [video]="video"></app-video>
+        }
+    </div>
+</div>
