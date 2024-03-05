@@ -22,6 +22,7 @@ export class AppComponent {
 
   constructor(public authService: AuthService, private router: Router, public popup: PopupService) {
 
+    // TODO!!! -> HANDLE NAVIGATION
     if (this.userIsLoggedIn()) {
       this.authService.userisLoggedIn = true;
       this.router.navigate(['/home']);

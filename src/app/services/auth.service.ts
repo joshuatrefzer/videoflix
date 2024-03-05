@@ -21,7 +21,7 @@ interface LoginResponse {
 })
 export class AuthService {
 
-  constructor(private http: HttpClient, private router: Router, private ps:PopupService) { }
+  constructor(private http: HttpClient, private router: Router, private ps: PopupService) { }
 
   userisLoggedIn = false;
   currentUser: User | undefined;
@@ -42,8 +42,8 @@ export class AuthService {
         this.mailSendFeedback = true;
       }
     }, error => {
-      if(error.status === 404) 
-      this.ps.errorPopup('No valid data, please fill every field with correct data');
+      if (error.status === 404)
+        this.ps.errorPopup('No valid data, please fill every field with correct data');
       this.loader = false;
     });
   }
@@ -60,9 +60,13 @@ export class AuthService {
         this.loader = false;
       }
     }, error => {
-      if(error.status === 404) 
-      this.ps.errorPopup('Wrong password or email. Do you have already an account?');
-      this.loader = false;
+      if (error.status === 404) {
+        this.ps.errorPopup('Wrong password or email. Do you have already an account?');
+        this.loader = false;
+      } else {
+        this.ps.errorPopup(error);
+      }
+
     });
   }
 

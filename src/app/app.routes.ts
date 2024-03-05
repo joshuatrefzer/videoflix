@@ -5,12 +5,14 @@ import { AuthComponent } from './auth/auth.component';
 import { UploadComponent } from './upload/upload.component';
 import { SuccessComponent } from './success/success.component';
 import { SearchComponent } from './search/search.component';
+import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 
 export const routes: Routes = [
     { path: 'success', component: SuccessComponent },
     { path: 'home', component: HomescreenComponent },
     { path: 'about', component: AboutComponent },
     { path: 'search', component: SearchComponent },
+    { path: 'resetpassword', component: ResetpasswordComponent },
     { path: 'authentication', component: AuthComponent },
     { path: 'upload', component: UploadComponent },
 ];

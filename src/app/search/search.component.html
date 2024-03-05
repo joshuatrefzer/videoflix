@@ -3,6 +3,7 @@
     <div class="feedback" *ngIf="searchService.searchResult.length < 1">There are no videos for your search  &nbsp;<span>"{{ searchService.value }}"</span></div>
 
     <div class="container">
+        <app-loader *ngIf="searchService.loader"></app-loader>
         @for (video of searchService.searchResult; track $index) {
         <app-video [video]="video"></app-video>
         }

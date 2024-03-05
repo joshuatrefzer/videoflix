@@ -13,9 +13,10 @@ export class SearchService {
   constructor(private http: HttpClient, private ps: PopupService) { }
   searchResult: Video[] = []; 
   value:string = '';
+  loader:boolean = false;
 
   search(searchValue: string) {
-
+    this.loader = true;
     const url = environment.baseUrl + '/api/videos/search/';
     this.value = searchValue;
     const data = {
@@ -23,6 +24,7 @@ export class SearchService {
     };
     this.http.post<Video[]>(url, data).subscribe((response) => {
       this.searchResult = response;
+      this.loader = false;
     }, (error) => {
       this.ps.errorPopup(`Error by searching "${searchValue}"`);
     });
