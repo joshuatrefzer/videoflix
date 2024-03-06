@@ -60,6 +60,11 @@
     }
 }
 
+.answer {
+    width: 50px;
+    margin: 10px;
+}
+
 .error-popup {
     animation: error-slide ease-in-out 300ms;
     position: absolute;
@@ -70,10 +75,14 @@
     border-radius: 20px;
     background-color: $bg-black;
     color: red;
+    text-align: center;
     font-size: 20px;
     font-weight: 300;
     z-index: 200;
     border: 2px white solid;
+    @media (max-width:600px){
+        font-size: 15px;
+    }
 }
 
 .message-popup {

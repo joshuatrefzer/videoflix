@@ -34,7 +34,7 @@ export class AuthComponent {
       repeatpassword: new FormControl('', [Validators.required, Validators.minLength(8)],),
     });
 
-    if (this.as.userisLoggedIn) {
+    if (this.as.isUserLoggedIn()) {
       this.router.navigate(['/home']);
     }
   }

@@ -17,11 +17,27 @@
 }
 
 <div *ngIf="popup.userPopup" class="logout">
+    @if (!deleteUserQuestion) {
     <div class="row"><span class="text-button">legal notice</span></div>
-    <div class="row"><span (click)="authService.deleteUser()" class="text-button">delete account</span></div>
-    <div class="row">
-        <span (click)="authService.logOut(); this.popup.closePopups()" class="text-button">log out</span>
+    <div *ngIf="!deleteUserQuestion" class="row">
+        <span (click)="deleteUserQuestion = true;" class="text-button">delete account</span>
     </div>
+
+    <div class="row">
+        <span *ngIf="!deleteUserQuestion" (click)="authService.logOut(); this.popup.closePopups()"
+            class="text-button">log out</span>
+    </div>
+
+    } @else {
+    <div class="row" style="padding-top: 10px;">Are you really sure?</div>
+    <div class="row">
+        <span class="text-button answer" (click)="authService.deleteUser()">yes</span>
+        <span class="text-button answer" (click)="deleteUserQuestion = false;">no</span>
+    </div>
+
+
+    }
+    
 </div>
 
 <app-loader class="full-screen" *ngIf="this.authService.loader"></app-loader>

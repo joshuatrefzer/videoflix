@@ -29,17 +29,16 @@ export class ResetpasswordComponent implements OnInit {
       repeatpassword: new FormControl('', [Validators.required, Validators.minLength(8)]),
     });
 
+    if (this.auth.isUserLoggedIn()) {
+      this.router.navigate(['/home'])
+    }
+
   }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       this.token = params['token'];
     });
-    if (this.auth.userisLoggedIn) {
-      this.router.navigate(['/home'])
-    }
-    
-
   }
 
   directToLogin() {

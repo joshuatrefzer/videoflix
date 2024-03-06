@@ -42,8 +42,11 @@ export class AuthService {
         this.mailSendFeedback = true;
       }
     }, error => {
-      if (error.status === 404)
+      if (error.status === 404) {
         this.ps.errorPopup('No valid data, please fill every field with correct data');
+      } else {
+        this.ps.errorPopup('Something went wrong..');
+      }
       this.loader = false;
     });
   }

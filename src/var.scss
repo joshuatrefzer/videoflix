@@ -65,6 +65,11 @@ $header-height: 80px;
     color: $red;
     @include full-width($height: 12px);
     @include center();
+    margin-top: 12px;
+
+    @media (max-width:600px) {
+        height: auto;
+    }
 }
 
 .error-container {

@@ -22,7 +22,7 @@ export class ForgotpasswordComponent {
       email: new FormControl('', [Validators.required, Validators.email])
     });
 
-    if (this.auth.userisLoggedIn) {
+    if (this.auth.isUserLoggedIn()) {
       this.route.navigate(['/home'])
     }
   }
@@ -33,10 +33,14 @@ export class ForgotpasswordComponent {
       const url = environment.baseUrl + '/password_reset/';
       const formData = new FormData();
       formData.append('email', this.emailForm.get('email')?.value);
+      this.auth.loader = true;
+
       this.http.post(url, formData).subscribe(res => {
+        this.auth.loader = false;
         this.ps.messagePopup('Please check your mail! We`ve sended you a reset link');
         this.emailForm.reset();
       }, error => {
+        this.auth.loader = false;
         this.ps.errorPopup('The request to reset your password failed');
       });
     } else {

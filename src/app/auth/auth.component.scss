@@ -9,17 +9,35 @@
 .login {
     width: 30%;
     min-width: 450px;
-    background-color: rgb(0, 0, 0);
+    background-color: $bg-black;
+    box-shadow: 1px 1px 10px  rgb(10, 10, 10);
     border-radius: 20px;
     padding: 20px;
     @include center-column();
+
+    @media (max-width:600px) {
+        min-width: unset;
+        width: calc(90% - 40px);
+        box-shadow: none;
+    }
 }
+
+.ai-start {
+    align-items: center;
+    @media (max-width:600px){
+        align-items: flex-start;
+    }
+}
+
 
 input {
     height: 40px;
     width: 70%;
     margin-top: 30px;
     border: 1px solid $bg-black;
+    @media (max-width:600px) {
+        width: 90%;
+    }
 }
 
 button {
@@ -31,6 +49,10 @@ button {
     margin-top: 20px;
     font-size: 15px;
     text-align: center;
+
+    @media (max-width:600px) {
+        font-size: 12px;
+    }
 }
 
 a {

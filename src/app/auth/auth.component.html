@@ -1,4 +1,4 @@
-<div class="container">
+<div [ngClass]="{'ai-start': directTo == 'signUp'}" class="container">
 
     @if(directTo == 'login') {
 
@@ -36,7 +36,7 @@
     @else if(directTo == 'signUp'){
     @if (!this.as.mailSendFeedback) {
 
-    <form class="login" [formGroup]="signUpForm" (ngSubmit)="signUp()">
+    <form class="login sign-up" [formGroup]="signUpForm" (ngSubmit)="signUp()">
         <h1>SIGN UP</h1>
         <input placeholder="firstname" type="text" formControlName="firstname"
             [ngClass]="{'invalid': isInvalid('firstname'), 'valid': isValidInput('firstname') }">

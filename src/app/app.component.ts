@@ -18,7 +18,7 @@ import { LoaderComponent } from './loader/loader.component';
 })
 export class AppComponent {
   title = 'videoflix';
-
+  deleteUserQuestion:boolean = false;
 
   constructor(public authService: AuthService, private router: Router,  public popup: PopupService) {
 
