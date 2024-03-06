@@ -76,6 +76,12 @@
     border: 2px white solid;
 }
 
+.message-popup {
+    @extend .error-popup;
+    color: white;
+}
+
+
 @keyframes error-slide {
     0% {
         transform: translate(-50%, 200%);

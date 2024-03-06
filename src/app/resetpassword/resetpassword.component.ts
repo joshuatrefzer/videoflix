@@ -5,6 +5,7 @@ import { PopupService } from '../services/popup.service';
 import { environment } from '../../environments/environment.development';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AuthService } from '../services/auth.service';
 
 
 @Component({
@@ -22,9 +23,9 @@ export class ResetpasswordComponent implements OnInit {
 
   pwResetForm: FormGroup;
 
-  constructor(private route: ActivatedRoute, private http: HttpClient, public ps: PopupService, private router: Router) {
+  constructor(private route: ActivatedRoute, private http: HttpClient, public ps: PopupService, private router: Router, private auth : AuthService) {
     this.pwResetForm = new FormGroup({
-      password: new FormControl('', [Validators.required, Validators.minLength(8)]),
+      password: new FormControl('', [Validators.required, Validators.minLength(8), this.passwordValidator.bind(this)]),
       repeatpassword: new FormControl('', [Validators.required, Validators.minLength(8)]),
     });
 
@@ -34,8 +35,10 @@ export class ResetpasswordComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       this.token = params['token'];
     });
-
-    console.log(this.token);
+    if (this.auth.userisLoggedIn) {
+      this.router.navigate(['/home'])
+    }
+    
 
   }
 
@@ -63,9 +66,10 @@ export class ResetpasswordComponent implements OnInit {
     const data = this.getFormData();
     if (!data) return
     this.http.post<any>(url, data).subscribe(response => {
-      console.log(response);
+      this.ps.messagePopup('Password reset was successful!');
+      this.pwResetForm.reset();
     }, error => {
-      this.ps.errorPopup('Your request failed, maybe your token is not vaild anymore. Try to repeat the reset process.');
+      this.ps.errorPopup('Your request failed, maybe your token is not vaild anymore.');
       console.error(error);
     });
   }
@@ -74,6 +78,18 @@ export class ResetpasswordComponent implements OnInit {
   isFormValid() {
     const myForm = this.whichFormToUse();
     return myForm?.valid;
+  }
+
+  passwordValidator(control: FormControl): { [key: string]: boolean } | null {
+    const value: string = control.value || '';
+    const hasUppercase = /[A-Z]/.test(value);
+    const hasLowercase = /[a-z]/.test(value);
+    const hasNumber = /\d/.test(value);
+    const hasSpecialChar = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(value);
+
+    const valid = hasUppercase && hasLowercase && hasNumber && hasSpecialChar;
+
+    return valid ? null : { 'invalidPassword': true };
   }
 
   emailError(key: string) {

@@ -6,9 +6,11 @@ import { UploadComponent } from './upload/upload.component';
 import { SuccessComponent } from './success/success.component';
 import { SearchComponent } from './search/search.component';
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
+import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 
 export const routes: Routes = [
     { path: 'success', component: SuccessComponent },
+    { path: 'forgotpassword', component: ForgotpasswordComponent },
     { path: 'home', component: HomescreenComponent },
     { path: 'about', component: AboutComponent },
     { path: 'search', component: SearchComponent },

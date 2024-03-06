@@ -12,6 +12,7 @@ export class PopupService {
   bg:boolean = false;
   videoDetail: Video | undefined;
   userPopup:boolean = false;
+  message:string | undefined;
 
 
   openPopup(){
@@ -23,6 +24,15 @@ export class PopupService {
     this.errorMessage = message;
     setTimeout(() => {
       this.errorMessage = undefined;
+      this.closePopups();
+    }, 3000);
+  }
+
+  messagePopup(message:string){
+    this.openPopup();
+    this.message = message;
+    setTimeout(() => {
+      this.message = undefined;
       this.closePopups();
     }, 3000);
   }

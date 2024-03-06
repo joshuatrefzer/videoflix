@@ -33,6 +33,10 @@ export class AuthComponent {
       password: new FormControl('', [Validators.required, Validators.minLength(8)],),
       repeatpassword: new FormControl('', [Validators.required, Validators.minLength(8)],),
     });
+
+    if (this.as.userisLoggedIn) {
+      this.router.navigate(['/home']);
+    }
   }
 
   logIn() {
@@ -60,6 +64,10 @@ export class AuthComponent {
       this.ps.errorPopup('please fill all fields with valid data');
     }
 
+  }
+
+  forgotPW(){
+    this.router.navigate(['/forgotpassword']);
   }
 
 

@@ -30,6 +30,7 @@ button {
 .question {
     margin-top: 20px;
     font-size: 15px;
+    text-align: center;
 }
 
 a {
@@ -42,4 +43,18 @@ a {
     font-weight: 300;
     line-height: 1.5;
     text-align: center;
+}
+
+.row {
+    font-size: 10px;
+
+    a {
+        color: grey;
+        &:hover {
+            color: $red;
+        }
+    }
+
+    font-weight: 300;
+    justify-content: center;
 }
