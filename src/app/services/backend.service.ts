@@ -6,6 +6,7 @@ import { Observable, filter } from 'rxjs';
 import { error } from 'console';
 import { Video, VideoGenre } from './interface';
 import { Router } from '@angular/router';
+import { PopupService } from './popup.service';
 
 
 
@@ -19,22 +20,15 @@ export class BackendService {
   uploadProgress: number = 0;
   uploadSuccessful: boolean = false;
 
-  constructor(private http: HttpClient, private router: Router) { }
-  
-  fetchVideoData() {
-    if (this.isNecessary()) {
-      this.getVideos().subscribe((data: Video[]) => {
-        this.videos = data;
-        console.log(this.videos);
-      }, error => {
-        console.log('Error by loading data from backend');
-      });
-    }
-  }
+  constructor(private http: HttpClient, private router: Router, private ps: PopupService) { }
 
-  isNecessary() {
-    return true;
-    // return this.videos.length === 0;
+  fetchVideoData() {
+    this.getVideos().subscribe((data: Video[]) => {
+      this.videos = data;
+      console.log(this.videos);
+    }, error => {
+      this.ps.errorPopup('Error by loading data from backend');
+    });
   }
 
   getVideos(): Observable<Video[]> {

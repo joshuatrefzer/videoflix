@@ -5,6 +5,7 @@ import { BackendService } from '../services/backend.service';
 import { log } from 'console';
 import { Video, VideoGenre } from '../services/interface';
 import { async } from 'rxjs';
+import { Router } from '@angular/router';
 
 enum Genre {
   Documentation = "documentation",
@@ -24,12 +25,19 @@ export class HomescreenComponent implements OnInit {
   loader: boolean = false;
 
 
-  constructor(public backend: BackendService) {
+  constructor(public backend: BackendService, private router: Router) {
   }
 
   ngOnInit(): void {
     this.backend.fetchVideoData();
 
   }
+
+  navigateToUpload(){
+    this.router.navigate(['/upload']);
+  }
+
+
+
 
 }

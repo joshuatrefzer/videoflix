@@ -1,4 +1,5 @@
 <div class="content">
+    @if (backend.videos.length >= 1) {
 
     @for (genre of genres; track $index) {
 
@@ -9,7 +10,7 @@
         <div class="video-rows">
 
             @for (video of backend.filterVideos(genre); track $index) {
-                <app-video [video]="video"></app-video>
+            <app-video [video]="video"></app-video>
             }
 
 
@@ -18,6 +19,11 @@
     }
     }
 
-
+    } @else {
+        <div class="novideos popup">
+            <div class="row">There are no videos at this moment.</div>
+            <div class="row"><button (click)="navigateToUpload()">UPLOAD VIDEO</button></div>
+        </div>
+    }
 
 </div>

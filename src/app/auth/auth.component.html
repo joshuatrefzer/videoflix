@@ -26,7 +26,7 @@
         
         <div class="question">Do you haven't registered yet? Please click <a (click)="direct('signUp'); ">here</a> to
             sign up.</div>
-
+        <div class="row"><a (click)="guestLogin()" class="guest">GUEST LOGIN</a></div>
         <button [ngClass]="{'valid-form-button': loginForm.valid}" type="submit">LOGIN</button>
     </form>
 

@@ -26,11 +26,16 @@
     gap: 30px;
     @include full-width($padding:10px , $margin:10px);
     @include center($jc:flex-start);
-    height: 95%;
-    
+    height: 95%;   
 }
 
-
+.novideos {
+    @include center();
+    .row {
+        margin-top: 20px;
+        justify-content: center;
+    }
+}
 
 .category {
     margin-left: 10px;

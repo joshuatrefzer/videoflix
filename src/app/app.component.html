@@ -20,7 +20,7 @@
     @if (!deleteUserQuestion) {
     <div class="row"><span class="text-button">legal notice</span></div>
     <div *ngIf="!deleteUserQuestion" class="row">
-        <span (click)="deleteUserQuestion = true;" class="text-button">delete account</span>
+        <span *ngIf="authService.isGuestUser() === null" (click)="deleteUserQuestion = true;" class="text-button">delete account</span>
     </div>
 
     <div class="row">

@@ -26,6 +26,13 @@ export class AuthService {
   userisLoggedIn = false;
   currentUser: User | undefined;
 
+  guestUser: User = {
+    firstname: "guest",
+    lastname: "user",
+    email: "videofix.joshuatrefzer@mailinator.com",
+    password: "Testpassword123"
+  }
+
 
   url = environment.baseUrl;
 
@@ -66,21 +73,30 @@ export class AuthService {
       if (error.status === 404) {
         this.ps.errorPopup('Wrong password or email. Do you have already an account?');
         this.loader = false;
-      } else {
-        this.ps.errorPopup(error);
+      } else if (error.status === 400) {
+        this.ps.errorPopup("Please activate your account before login. Please check your mail.");
+        this.loader = false;
       }
-
     });
   }
 
   logOut() {
     this.loader = true;
-    const url = this.url + '/users/logout/';
-    this.http.post(url, '').subscribe(r => {
+    if (this.isGuestUser()) {
       this.resetData();
-    }, error => {
-      console.log('Not successfully logged out');
-    });
+    } else {
+      const url = this.url + '/users/logout/';
+      this.http.post(url, '').subscribe(r => {
+        this.resetData();
+      }, error => {
+        console.log('Not successfully logged out');
+      });
+    }
+  }
+
+  isGuestUser() {
+    return this.currentUser?.email === this.guestUser.email &&
+      this.currentUser?.firstname === this.guestUser.firstname;
   }
 
 

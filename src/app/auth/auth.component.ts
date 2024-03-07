@@ -39,6 +39,15 @@ export class AuthComponent {
     }
   }
 
+  guestLogin() {
+    const userData = new FormData();
+    if (this.as.guestUser.password) {
+      userData.append('email', this.as.guestUser.email);
+      userData.append('password', this.as.guestUser.password);
+      this.as.login(userData);
+    }
+  }
+
   logIn() {
     if (this.loginForm.valid) {
       const userData = new FormData();
@@ -48,7 +57,6 @@ export class AuthComponent {
     } else {
       this.ps.errorPopup('please fill all fields with valid data');
     }
-
   }
 
   signUp() {
@@ -58,6 +66,7 @@ export class AuthComponent {
       formData.append('last_name', this.signUpForm.get('lastname')?.value);
       formData.append('email', this.signUpForm.get('email')?.value);
       formData.append('password', this.signUpForm.get('password')?.value);
+      formData.append('username', this.signUpForm.get('firstname')?.value + '_' + this.signUpForm.get('lastname')?.value);
 
       this.as.signUp(formData);
     } else {
@@ -66,7 +75,7 @@ export class AuthComponent {
 
   }
 
-  forgotPW(){
+  forgotPW() {
     this.router.navigate(['/forgotpassword']);
   }
 
