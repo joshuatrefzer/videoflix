@@ -19,9 +19,20 @@
         <div [ngClass]="{'hide-infobox': hideInfo}" class="bottom-container">
             <div class="left-side">
                 @if (!hideInfo) {
-                <div class="row"><span>Actors: </span>&nbsp; {{ ps.videoDetail?.actors }}</div>
-                <div class="row"><span>Description: </span>&nbsp; {{ ps.videoDetail?.description }}</div>
-                <div class="row"><span>Genre: </span> &nbsp; {{ ps.videoDetail?.genre }}</div>
+                <div class="row box">
+                    <span class="categories" >Actors: </span>
+                    <div class="text">{{ ps.videoDetail?.actors }}</div>
+                </div>
+
+                <div class="row">
+                    <span class="categories">Description: </span>
+                    <div class="text">{{ ps.videoDetail?.description }}</div> 
+                </div>
+
+                <div class="row">
+                    <span class="categories">Genre: </span>
+                    <div class="text">{{ ps.videoDetail?.genre }}</div> 
+                </div>
                 }
             </div>
 
@@ -44,7 +55,7 @@
             </div>
 
             <div class="arrow-button">
-                <img (click)="hideInfoBox()" src="assets/img/double-arrow-bottom-icon.png" alt="">
+                <img (click)="hideInfoBox()" src="assets/img/arr.png" alt="">
             </div>
 
         </div>
@@ -54,7 +65,7 @@
     @if (hideInfo) {
     <div class="arrow-button">
         <img style="transform: rotate(180deg);" (click)="showInfoBox($event)"
-            src="assets/img/double-arrow-bottom-icon.png" alt="">
+            src="assets/img/arr.png" alt="">
     </div>
     }
 

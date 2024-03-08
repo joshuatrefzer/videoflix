@@ -2,9 +2,11 @@
 
 
 .container {
+    padding-top: 80px;
     @include full-width();
     @include center();
-    height: calc(100vh - 80px);
+    height: 100vh;
+    overflow-y: scroll
 }
 
 .input-container {
@@ -15,6 +17,15 @@
     background-color: black;
     border-radius: 20px;
     position: relative;
+    max-height: 60vh;
+    overflow-y: scroll;
+    @media (max-width:1300px) {
+        background-color: $bg-black;
+    }
+
+    @media (max-width:600px) {
+        width: calc(100% - 80px);
+    }
 }
 
 .top {
@@ -27,6 +38,10 @@
     @include full-width();
     @include center($ai: flex-start);
     height: 80%;
+    @media (max-width:1300px) {
+        flex-direction: column;
+        align-items: center;
+    }
 }
 
 .left {
@@ -34,6 +49,9 @@
     height: 100%;
     gap: 10px;
     @include center-column();
+    @media (max-width:1300px) {
+        width: 100%;
+    }
 }
 
 .right {
@@ -41,6 +59,9 @@
     height: 100%;
     @include center-column();
     gap: 10px;
+    @media (max-width:1300px) {
+        width: 100%;
+    }
 }
 
 input,
@@ -68,6 +89,10 @@ select {
     background-size: 10px;
     background-origin: content-box;
     background-color: $bg-black;
+    @media (max-width:1300px) {
+        background-color: rgb(67, 67, 67);
+    }
+    
 
     &:focus {
         outline: none;
@@ -88,6 +113,10 @@ label {
     width: 30%;
     @include center();
     border-radius: 10px;
+
+    @media (max-width:1300px) {
+        background-color: black;
+    }
 
     &:hover {
         cursor: pointer;

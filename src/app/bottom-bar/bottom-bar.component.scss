@@ -1,0 +1,28 @@
+@import "../../var.scss";
+
+.container {
+    @include center($jc:space-around, $ai:flex-end);
+    @include full-width($height:100px);
+}
+
+a {
+    @include center-column($jc:center);
+    font-size: 12px;
+    img {
+        height: 25px;
+    }
+    padding: 5px;
+    border-radius: 100%;
+    margin-bottom: 5px;
+    width: 50px;
+    height: 50px;
+    border: 1px solid rgba(109, 108, 108, 0);
+}
+
+.active-link {
+    border: 1px solid rgb(109, 108, 108);
+    background-color: $bg-black;
+    img {
+        filter: brightness(1);
+    }
+}

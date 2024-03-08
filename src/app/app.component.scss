@@ -26,6 +26,39 @@
     overflow: hidden;
 }
 
+app-video-detail {
+    position: absolute;
+    top:0;
+    left: 0;
+    height: 100vh !important;
+    width: 100% !important;
+    
+}
+
+app-bottom-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    @include full-width();
+    height: 100px;
+    z-index: 5;
+    background:linear-gradient(rgba(0, 0, 0, 0),  black);
+
+    @media (max-width: 800px) {
+        background:linear-gradient(rgba(0, 0, 0, 0), $bg-black,  black);
+    }
+}
+
+app-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    @include full-width();
+    height: 100px;
+    background:linear-gradient(black, black,  rgba(0, 0, 0, 0));
+    z-index: 5;
+}
+
 
 .popup {
     z-index: 200;

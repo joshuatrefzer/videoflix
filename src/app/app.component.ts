@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
@@ -8,17 +8,19 @@ import { PopupService } from './services/popup.service';
 import { VideoDetailComponent } from './video-detail/video-detail.component';
 import { environment } from '../environments/environment.development';
 import { LoaderComponent } from './loader/loader.component';
+import { BottomBarComponent } from "./bottom-bar/bottom-bar.component";
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
-  imports: [CommonModule, RouterOutlet, HeaderComponent, VideoComponent, VideoDetailComponent, LoaderComponent]
+    selector: 'app-root',
+    standalone: true,
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.scss',
+    imports: [CommonModule, RouterOutlet, HeaderComponent, VideoComponent, VideoDetailComponent, LoaderComponent, BottomBarComponent]
 })
 export class AppComponent {
   title = 'videoflix';
   deleteUserQuestion:boolean = false;
+  screenWidth: number |undefined;
 
   constructor(public authService: AuthService, private router: Router,  public popup: PopupService) {
 
@@ -32,6 +34,17 @@ export class AppComponent {
         }
       }
     });  
+    this.getScreenWidth();
+  }
+
+  @HostListener('window:resize', ['$event'])
+  getScreenWidth() {
+    this.screenWidth = window.innerWidth;
+    if (this.screenWidth <= 1000) {
+      this.popup.isMobile = true;
+    } else {
+      this.popup.isMobile = false;
+    }
   }
 
   handleLogin(){

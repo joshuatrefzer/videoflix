@@ -34,6 +34,7 @@ export class UploadComponent {
       description: new FormControl('', [Validators.required, Validators.minLength(15)]),
     });
     this.genres = genres;
+    this.ps.activeLink = '/upload';
   }
 
   onVideoSelected(event: any) {

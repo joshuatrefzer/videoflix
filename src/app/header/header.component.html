@@ -1,9 +1,9 @@
 <header>
-    <div class="left">
+    <div *ngIf="!ps.isMobile" class="left">
         <a class="movieflix" [routerLink]="['/home']"><span>MOVIEFLIX</span></a>
-        <a [routerLink]="['/home']" [ngClass]="{'active-link': activeLink === '/home'}">Home</a>
-        <a [routerLink]="['/upload']" [ngClass]="{'active-link': activeLink === '/upload'}">Upload</a>
-        <a [routerLink]="['/about']" [ngClass]="{'active-link': activeLink === '/about'}">About</a>
+        <a [routerLink]="['/home']" [ngClass]="{'active-link': ps.activeLink === '/home'}">Home</a>
+        <a [routerLink]="['/upload']" [ngClass]="{'active-link': ps.activeLink === '/upload'}">Upload</a>
+        <a [routerLink]="['/about']" [ngClass]="{'active-link': ps.activeLink === '/about'}">About</a>
     </div>
     <div class="right">
         <app-searchbar></app-searchbar>

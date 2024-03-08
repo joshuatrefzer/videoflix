@@ -19,11 +19,7 @@ export class HeaderComponent {
     }
 
     ngOnInit(): void {
-        this.router.events.subscribe(event => {
-            if (event instanceof NavigationEnd) {
-                this.activeLink = event.url;
-            }
-        });
+       
     }
 
   

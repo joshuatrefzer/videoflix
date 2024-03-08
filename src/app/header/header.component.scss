@@ -3,16 +3,15 @@
 header {
     @include full-width($height: 80px);
     @include center();
-    background-color: black;
 }
 
 .left {
     @include full-width($padding: 10px);
-    @include center($jc:space-between);
+    @include center($jc: space-between);
 }
 
 .active-link {
-    color: rgb(158, 158, 158); /* Füge hier deine gewünschte Farbe hinzu */
+    color: $red;
 }
 
 .user {
@@ -22,16 +21,23 @@ header {
     border: 2px solid white;
     background-color: $bg-black;
     @include center();
+
     img {
         height: 20px;
     }
+
     @extend .text-button;
 }
 
 
 .right {
     @include full-width($padding: 10px);
-    @include center($jc:flex-end);
+
+    @media (max-width:1000px) {
+        @include center($jc: space-between);
+    }
+
+    @include center($jc: flex-end);
 }
 
 .movieflix {

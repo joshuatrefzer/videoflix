@@ -6,6 +6,7 @@ import { log } from 'console';
 import { Video, VideoGenre } from '../services/interface';
 import { async } from 'rxjs';
 import { Router } from '@angular/router';
+import { PopupService } from '../services/popup.service';
 
 enum Genre {
   Documentation = "documentation",
@@ -25,12 +26,13 @@ export class HomescreenComponent implements OnInit {
   loader: boolean = false;
 
 
-  constructor(public backend: BackendService, private router: Router) {
+  constructor(public backend: BackendService, private router: Router, private ps: PopupService) {
+    this.ps.activeLink = '/home';
   }
 
   ngOnInit(): void {
     this.backend.fetchVideoData();
-
+    
   }
 
   navigateToUpload(){

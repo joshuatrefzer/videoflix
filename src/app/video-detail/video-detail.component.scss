@@ -34,6 +34,11 @@
     transition: all ease-in-out 300ms;
 }
 
+.box {
+    height: auto !important;
+    align-items: flex-start !important;
+}
+
 .bottom-container {
     position: relative;
     padding-left: 20px;
@@ -56,6 +61,20 @@
     width: 50%;
     @include center-column();
     gap: 10px;
+    .row {
+        align-items: flex-start;
+    }
+}
+
+.categories {
+    font-weight: bold;
+    width: 25%;
+}
+
+.text {
+    font-size: 12px;
+    font-weight: 300;
+    width: 75%;
 }
 
 .right-side {
@@ -148,14 +167,12 @@
     @include center();
 
     img {
+        opacity: 0.3;
         cursor: pointer;
-        width: 25px;
+        width: 20px;
         transition: all 200ms ease-in-out;
         &:hover {
-            filter: contrast(0.0);
-        }
-        &:active {
-            filter: contrast(0.5);
+            opacity: 1;
         }
     }
 }

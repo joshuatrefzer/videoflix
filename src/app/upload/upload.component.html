@@ -45,13 +45,12 @@
 
                 <div class="row">
                     <label [ngClass]="{'valid': selectedVideo, 'invalid': errorVideo }" for="video"
-                        class="custom-file-input">Video auswählen
+                        class="custom-file-input">Video 
                         <input type="file" id="video" placeholder="video" (change)="onVideoSelected($event)">
                     </label>
 
                     <label [ngClass]="{'valid': selectedThumbnail , 'invalid': errorThumb }" for="thumb"
                         class="custom-file-input">Thumbnail
-                        auswählen
                         <input type="file" id="thumb" placeholder="thumbnail" (change)="onThumbnailSelected($event)">
                     </label>
                 </div>

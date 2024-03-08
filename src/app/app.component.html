@@ -5,6 +5,10 @@
     <app-header></app-header>
     }
 
+    @if(this.authService.userisLoggedIn){
+        <app-bottom-bar></app-bottom-bar>
+    }
+
     <router-outlet></router-outlet>
 </div>
 

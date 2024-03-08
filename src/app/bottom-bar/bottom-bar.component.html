@@ -1,0 +1,16 @@
+<div *ngIf="ps.isMobile" class="container">
+    <a [routerLink]="['/home']" [ngClass]="{'active-link': ps.activeLink === '/home'}">
+        <img src="assets/img/home-icon.png" alt="">
+        <span>Home</span>
+    </a>
+
+    <a [routerLink]="['/upload']" [ngClass]="{'active-link': ps.activeLink === '/upload'}">
+        <img src="assets/img/upload-icon.png" alt="">
+        <span>Upload</span>
+    </a>
+
+    <a [routerLink]="['/about']" [ngClass]="{'active-link': ps.activeLink === '/about'}">
+        <img src="assets/img/about-icon.png" alt="">
+        <span>About</span>
+    </a>
+</div>

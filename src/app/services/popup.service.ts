@@ -13,11 +13,14 @@ export class PopupService {
   videoDetail: Video | undefined;
   userPopup:boolean = false;
   message:string | undefined;
-
+  isMobile:boolean = false;
+  activeLink: string = ''; 
 
   openPopup(){
     this.bg = true;
   }
+
+  
 
   errorPopup(message:string){
     this.openPopup();
