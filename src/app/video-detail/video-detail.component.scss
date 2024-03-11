@@ -20,10 +20,18 @@
     border-radius: 20px;
     box-shadow: 5px 5px 10px black;
     @include center-column();
+    @media (max-width:1000px) {
+        height: 90%;
+        width: 90%;
+    }
 }
 
 .big-popup {
     width: 80%;
+    @media (max-width:1000px) {
+        width: 100% !important;
+        height: 100% !important;
+    }
 }
 
 .top-container {
@@ -37,6 +45,9 @@
 .box {
     height: auto !important;
     align-items: flex-start !important;
+    @media (max-width:1300px) {
+        flex-direction: column;
+    }
 }
 
 .bottom-container {
@@ -57,6 +68,7 @@
 }
 
 .left-side {
+    overflow-y: scroll;
     height: 100%;
     width: 50%;
     @include center-column();
@@ -64,6 +76,7 @@
     .row {
         align-items: flex-start;
     }
+
 }
 
 .categories {
@@ -74,7 +87,10 @@
 .text {
     font-size: 12px;
     font-weight: 300;
-    width: 75%;
+    width: 90%;
+    @media (max-width:800px) {
+        width: 95%;
+    }
 }
 
 .right-side {

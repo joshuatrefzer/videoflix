@@ -57,7 +57,10 @@ export class BackendService {
         }
 
       }, error => {
-        console.log('error by uploading data', error);
+        this.ps.errorPopup('Error by uploading data');
+        console.log(error);
+        this.router.navigate(['/home']);
+        
       });
   }
 

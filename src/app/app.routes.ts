@@ -7,12 +7,14 @@ import { SuccessComponent } from './success/success.component';
 import { SearchComponent } from './search/search.component';
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
+import { LegalsComponent } from './legals/legals.component';
 
 export const routes: Routes = [
     { path: 'success', component: SuccessComponent },
     { path: 'forgotpassword', component: ForgotpasswordComponent },
     { path: 'home', component: HomescreenComponent },
     { path: 'about', component: AboutComponent },
+    { path: 'legals', component: LegalsComponent },
     { path: 'search', component: SearchComponent },
     { path: 'resetpassword', component: ResetpasswordComponent },
     { path: 'authentication', component: AuthComponent },

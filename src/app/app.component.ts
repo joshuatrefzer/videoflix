@@ -66,6 +66,12 @@ export class AppComponent {
 
   redirectToAuth() {
     this.router.navigate(['/authentication']);
+    this.popup.closePopups();
+  }
+
+  navigateToLegals(){
+    this.router.navigate(['/legals']);
+    this.popup.closePopups();
   }
 
 

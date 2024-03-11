@@ -1,0 +1,39 @@
+@import "../../var.scss";
+
+.container {
+    @extend .full-site;
+    height: calc(100% - 180px);
+}
+
+h1 {
+    height: 20%;
+}
+
+.selected {
+    color: $red;
+}
+
+.text {
+    position: relative;
+    height: 80%;
+    width: calc(100% - 200px);
+    padding: 0px 100px;
+    overflow-y: scroll;
+    @media (max-width:800px) {
+        width: calc(100% - 40px);
+        padding: 0px 20px;
+    }
+}
+
+.text-bottom {
+    position:sticky;
+    height: 200px;
+    bottom: 0;
+    left: 0;
+    @include full-width();
+    background: linear-gradient(rgba(80, 80, 80, 0), $bg-black);
+}
+
+a {
+    color: $red;
+}

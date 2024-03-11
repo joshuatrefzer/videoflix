@@ -35,6 +35,12 @@ $header-height: 80px;
     z-index: 100;
 }
 
+.center {
+    display: flex;
+    justify-content: center !important;
+    align-items: center;
+}
+
 .full-site {
     @extend .full-screen;
     top: $header-height;

@@ -22,7 +22,7 @@
 
 <div *ngIf="popup.userPopup" class="logout">
     @if (!deleteUserQuestion) {
-    <div class="row"><span class="text-button">legal notice</span></div>
+    <div class="row"><span class="text-button" (click)="navigateToLegals()">legal notice</span></div>
     <div *ngIf="!deleteUserQuestion" class="row">
         <span *ngIf="authService.isGuestUser() === null" (click)="deleteUserQuestion = true;" class="text-button">delete account</span>
     </div>
