@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
 import { HttpClient, HttpEventType, HttpProgressEvent } from '@angular/common/http';
 
-import { Observable, filter } from 'rxjs';
+import { Observable, filter, take } from 'rxjs';
 import { error } from 'console';
 import { Video, VideoGenre } from './interface';
 import { Router } from '@angular/router';
 import { PopupService } from './popup.service';
+import { AuthService } from './auth.service';
 
 
 
@@ -20,15 +21,22 @@ export class BackendService {
   uploadProgress: number = 0;
   uploadSuccessful: boolean = false;
 
-  constructor(private http: HttpClient, private router: Router, private ps: PopupService) { }
+  constructor(private http: HttpClient, private router: Router, private ps: PopupService, private auth: AuthService) { }
 
   fetchVideoData() {
-    this.getVideos().subscribe((data: Video[]) => {
-      this.videos = data;
-      console.log(this.videos);
-    }, error => {
-      this.ps.errorPopup('Error by loading data from backend');
-    });
+    this.getVideos().pipe(take(1)).subscribe(
+      {
+        next: (data: Video[]) => {
+          this.videos = data;
+          this.auth.loader = false;
+        },
+        error: error => {
+          this.auth.loader = true;
+          this.ps.errorPopup('Error by loading data from backend');
+        },
+        complete: () => console.log("Observable hat sein zweck erfüllt.")
+      }
+    );
   }
 
   getVideos(): Observable<Video[]> {
@@ -60,7 +68,7 @@ export class BackendService {
         this.ps.errorPopup('Error by uploading data');
         console.log(error);
         this.router.navigate(['/home']);
-        
+
       });
   }
 

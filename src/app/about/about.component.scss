@@ -1,7 +1,6 @@
 @import "../../var.scss";
 
 
-
 .container {
     @extend .full-site;
 }
@@ -23,5 +22,4 @@
         padding: 20px;
         width: calc(100% - 40px);
     }
-
 }

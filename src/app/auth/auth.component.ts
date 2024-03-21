@@ -34,11 +34,13 @@ export class AuthComponent {
       repeatpassword: new FormControl('', [Validators.required, Validators.minLength(8)],),
     });
 
-    if (this.as.isUserLoggedIn()) {
-      this.router.navigate(['/home']);
-    }
+    if (this.as.isUserLoggedIn()) this.router.navigate(['/home']);
+  
   }
 
+  /**
+   * Uses data from guest user account and prepares data for request. 
+   */
   guestLogin() {
     const userData = new FormData();
     if (this.as.guestUser.password) {
@@ -48,6 +50,9 @@ export class AuthComponent {
     }
   }
 
+  /**
+   * Uses data from loginform. Valid data is prepared for request.
+   */
   logIn() {
     if (this.loginForm.valid) {
       const userData = new FormData();
@@ -59,6 +64,10 @@ export class AuthComponent {
     }
   }
 
+
+  /**
+   * Uses data from signupform. Valid data is prepared for request.
+   */
   signUp() {
     if (this.signUpForm.valid) {
       const formData = new FormData();
@@ -72,14 +81,19 @@ export class AuthComponent {
     } else {
       this.ps.errorPopup('please fill all fields with valid data');
     }
-
   }
 
+  /**
+   * navigates to forgot password formular in the frontend
+   */
   forgotPW() {
     this.router.navigate(['/forgotpassword']);
   }
 
-
+  /**
+   * 
+   * @param key shows right formular in the frontend, and handles navigation between the two formulars
+   */
   direct(key: "signUp" | "login") {
     this.directTo = key;
     this.loginForm.reset();

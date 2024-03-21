@@ -95,8 +95,12 @@ export class AuthService {
   }
 
   isGuestUser() {
-    return this.currentUser?.email === this.guestUser.email &&
-      this.currentUser?.firstname === this.guestUser.firstname;
+    if (this.currentUser?.email === this.guestUser.email &&
+      this.currentUser?.firstname === this.guestUser.firstname) {
+        return true;
+      } else {
+        return false;
+      }
   }
 
 

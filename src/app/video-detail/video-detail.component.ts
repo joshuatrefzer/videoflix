@@ -23,8 +23,6 @@ export class VideoDetailComponent implements OnInit, OnDestroy {
   hideResolution: boolean = false;
   hideInfo: boolean = false;
 
-
-
   low: boolean = false;
   middle: boolean = false;
   high: boolean = true;
@@ -41,11 +39,7 @@ export class VideoDetailComponent implements OnInit, OnDestroy {
     this.ps.videoDetail = undefined;
   }
 
-  /**
-   * 
-   * @param path ...
-   * @param event 
-   */
+ 
   changeResolution(path: string, event: MouseEvent) {
     event.stopPropagation();
     this.resetResolutionVars();

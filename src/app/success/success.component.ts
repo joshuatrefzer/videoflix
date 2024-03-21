@@ -20,8 +20,20 @@ export class SuccessComponent {
     }
   }
 
-  startCount() {
+
+  /**
+   * Starts a countdown and redirects to another page when the countdown is complete.
+   */
+  startCount(): void {
+    /**
+     * Interval for the countdown.
+     * @type {NodeJS.Timeout}
+     */
     const interval = setInterval(() => {
+      /**
+       * Checks if the countdown has finished.
+       * @type {number}
+       */
       if (this.count <= 0) {
         clearInterval(interval);
         this.redirect();
@@ -30,7 +42,11 @@ export class SuccessComponent {
     }, 1000);
   }
 
-  redirect() {
+  
+  /**
+   * Redirects to the authentication page.
+   */
+  redirect(): void {
     this.router.navigate(['/authentication']);
   }
 

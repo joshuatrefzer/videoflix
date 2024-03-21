@@ -25,17 +25,21 @@ export class HomescreenComponent implements OnInit {
   videos: Video[] = [];
   loader: boolean = false;
 
-
   constructor(public backend: BackendService, private router: Router, private ps: PopupService) {
     this.ps.activeLink = '/home';
   }
 
+  /**
+   * A function "fetchVideoData" in Backend Service Intance is called. When the Component starts their livecycle.
+   */
   ngOnInit(): void {
     this.backend.fetchVideoData();
-    
   }
 
-  navigateToUpload(){
+  /**
+   * Navigates to Uploadpage
+   */
+  navigateToUpload() {
     this.router.navigate(['/upload']);
   }
 

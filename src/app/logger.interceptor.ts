@@ -6,7 +6,6 @@ export const loggerInterceptor: HttpInterceptorFn = (req, next) => {
   if (token) {
     const authReq = req.clone({
 
-
       headers: req.headers.set('Authorization', `Token ${token}`)
       
     });

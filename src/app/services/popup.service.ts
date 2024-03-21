@@ -20,8 +20,6 @@ export class PopupService {
     this.bg = true;
   }
 
-  
-
   errorPopup(message:string){
     this.openPopup();
     this.errorMessage = message;
