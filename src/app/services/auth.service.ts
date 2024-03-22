@@ -70,13 +70,13 @@ export class AuthService {
         this.loader = false;
       }
     }, error => {
+      this.loader = false;
       if (error.status === 404) {
         this.ps.errorPopup('Wrong password or email. Do you have already an account?');
-        this.loader = false;
       } else if (error.status === 400) {
         this.ps.errorPopup("Please activate your account before login. Please check your mail.");
-        this.loader = false;
       }
+      
     });
   }
 

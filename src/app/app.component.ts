@@ -66,6 +66,7 @@ export class AppComponent {
 
   redirectToAuth() {
     this.router.navigate(['/authentication']);
+    this.authService.userisLoggedIn = false;
     this.popup.closePopups();
   }
 
