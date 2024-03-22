@@ -3,7 +3,6 @@ import { environment } from '../../environments/environment.development';
 import { HttpClient, HttpEventType, HttpProgressEvent } from '@angular/common/http';
 
 import { Observable, filter, take } from 'rxjs';
-import { error } from 'console';
 import { Video, VideoGenre } from './interface';
 import { Router } from '@angular/router';
 import { PopupService } from './popup.service';
@@ -33,8 +32,7 @@ export class BackendService {
         error: error => {
           this.auth.loader = true;
           this.ps.errorPopup('Error by loading data from backend');
-        },
-        complete: () => console.log("Observable hat sein zweck erfüllt.")
+        }
       }
     );
   }
@@ -66,7 +64,6 @@ export class BackendService {
 
       }, error => {
         this.ps.errorPopup('Error by uploading data');
-        console.log(error);
         this.router.navigate(['/home']);
 
       });

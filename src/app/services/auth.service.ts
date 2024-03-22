@@ -3,7 +3,6 @@ import { User } from './interface';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment.development';
 import { Router } from '@angular/router';
-import { error } from 'console';
 import { PopupService } from './popup.service';
 
 
@@ -43,7 +42,6 @@ export class AuthService {
     this.loader = true;
     const url = this.url + '/users/register/';
     this.http.post(url, userData).subscribe(response => {
-      console.log(response);
       if (response) {
         this.loader = false;
         this.mailSendFeedback = true;
@@ -89,7 +87,7 @@ export class AuthService {
       this.http.post(url, '').subscribe(r => {
         this.resetData();
       }, error => {
-        console.log('Not successfully logged out');
+        this.ps.errorPopup('Not successfully logged out');
       });
     }
   }
@@ -109,7 +107,7 @@ export class AuthService {
     this.http.post(url, '').subscribe(response => {
       this.resetData();
     }, error => {
-      console.log('User not deleted successfully');
+      this.ps.errorPopup('User not deleted successfully');
 
     });
   }
