@@ -9,6 +9,11 @@
         <span>Upload</span>
     </a>
 
+    <a [routerLink]="['/favorites']" [ngClass]="{'active-link': ps.activeLink === '/favorites'}">
+        <img src="assets/img/favorite.png" alt="">
+        <span>My list</span>
+    </a>
+
     <a [routerLink]="['/about']" [ngClass]="{'active-link': ps.activeLink === '/about'}">
         <img src="assets/img/about-icon.png" alt="">
         <span>About</span>

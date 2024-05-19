@@ -2,17 +2,19 @@ import { Component, ElementRef, Input, OnDestroy, OnInit } from '@angular/core';
 import { PopupService } from '../services/popup.service';
 import { environment } from '../../environments/environment.development';
 import { CommonModule } from '@angular/common';
+import { VideoPlayerComponent } from '../video-player/video-player.component';
+import {MatIconModule} from '@angular/material/icon';
 
 
 @Component({
   selector: 'app-video-detail',
   standalone: true,
-  imports: [[CommonModule]],
+  imports: [CommonModule, VideoPlayerComponent, MatIconModule],
   templateUrl: './video-detail.component.html',
   styleUrl: './video-detail.component.scss'
 })
 export class VideoDetailComponent implements OnInit, OnDestroy {
-  
+
 
 
   constructor(public ps: PopupService, private elementRef: ElementRef) { }
@@ -24,8 +26,8 @@ export class VideoDetailComponent implements OnInit, OnDestroy {
   hideInfo: boolean = false;
 
   low: boolean = false;
-  middle: boolean = false;
-  high: boolean = true;
+  middle: boolean = true;
+  high: boolean = false;
 
 
 
@@ -39,13 +41,18 @@ export class VideoDetailComponent implements OnInit, OnDestroy {
     this.ps.videoDetail = undefined;
   }
 
- 
+
   changeResolution(path: string, event: MouseEvent) {
     event.stopPropagation();
+    this.resolutionUpdate(path);
+    this.closeResolutionButtons();
+  }
+
+
+  resolutionUpdate(path: string) {
     this.resetResolutionVars();
     const videoBase = environment.baseUrl + this.ps.videoDetail?.video_file;
     this.video = videoBase.replace(".mp4", path);
-    this.closeResolutionButtons();
   }
 
   closeResolutionButtons() {
@@ -87,11 +94,11 @@ export class VideoDetailComponent implements OnInit, OnDestroy {
   }
 
 
-  hideInfoBox(){
+  hideInfoBox() {
     this.hideInfo = true;
   }
 
-  showInfoBox(event:MouseEvent){
+  showInfoBox(event: MouseEvent) {
     event.stopPropagation();
     this.hideInfo = false;
   }

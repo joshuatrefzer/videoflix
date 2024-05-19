@@ -8,12 +8,15 @@ import { SearchComponent } from './search/search.component';
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 import { LegalsComponent } from './legals/legals.component';
+import { FavoritesComponent } from './favorites/favorites.component';
 
 export const routes: Routes = [
     { path: 'success', component: SuccessComponent },
+    { path: '', component: HomescreenComponent },
     { path: 'forgotpassword', component: ForgotpasswordComponent },
     { path: 'home', component: HomescreenComponent },
     { path: 'about', component: AboutComponent },
+    { path: 'favorites', component: FavoritesComponent },
     { path: 'legals', component: LegalsComponent },
     { path: 'search', component: SearchComponent },
     { path: 'resetpassword', component: ResetpasswordComponent },

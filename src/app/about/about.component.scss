@@ -7,6 +7,9 @@
 
 .row {
     height: 20%;
+    @media (max-width:1000px) {
+       height: 10%;
+    }
 }
 
 .text {
@@ -18,8 +21,10 @@
     font-weight: 300;
     line-height: 2;
     
-    @media (max-width:100px) {
+    @media (max-width:1000px) {
         padding: 20px;
         width: calc(100% - 40px);
+        font-size: 15px;
+        height: calc(90% - 100px);
     }
 }

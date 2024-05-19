@@ -13,5 +13,5 @@ import { cachingInterceptor } from './caching.interceptor';
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes), provideClientHydration(), provideHttpClient(withFetch() , withInterceptors([
     loggerInterceptor, errorInterceptor
-  ])), provideAnimationsAsync()]
+  ])), provideAnimationsAsync(), provideAnimationsAsync()]
 };

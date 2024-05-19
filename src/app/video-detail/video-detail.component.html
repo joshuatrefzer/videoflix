@@ -2,17 +2,13 @@
     <div [ngClass]="{'big-popup': hideInfo}" class="popup" (click)="handleContainerClick($event)">
         <div [ngClass]="{'full-fill': hideInfo}" class="top-container">
 
-            <video id="my-video" class="video-js" controls preload="auto" width="640" height="264" poster="{{ thumb }}"
-                data-setup="{}">
-                <source src="{{ video }}" type="video/mp4" />
-                <source src="MY_VIDEO.webm" type="video/webm" />
-                <p class="vjs-no-js">
-                    To view this video please enable JavaScript, and consider upgrading to a
-                    web browser that
-                    <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
-                </p>
-            </video>
-
+            @if (middle) {
+            <app-video-player [thumb]="thumb" [video]="video"></app-video-player>
+            }@else if (low) {
+            <app-video-player [thumb]="thumb" [video]="video"></app-video-player>
+            }@else if (high) {
+            <app-video-player [thumb]="thumb" [video]="video"></app-video-player>
+            }
 
 
         </div>
@@ -20,18 +16,18 @@
             <div class="left-side">
                 @if (!hideInfo) {
                 <div class="row box">
-                    <span class="categories" >Actors: </span>
+                    <span class="categories">Actors: </span>
                     <div class="text">{{ ps.videoDetail?.actors }}</div>
                 </div>
 
                 <div class="row box">
                     <span class="categories">Description: </span>
-                    <div class="text">{{ ps.videoDetail?.description }}</div> 
+                    <div class="text">{{ ps.videoDetail?.description }}</div>
                 </div>
 
                 <div class="row box">
                     <span class="categories">Genre: </span>
-                    <div class="text">{{ ps.videoDetail?.genre }}</div> 
+                    <div class="text">{{ ps.videoDetail?.genre }}</div>
                 </div>
                 }
             </div>
@@ -59,13 +55,12 @@
             </div>
 
         </div>
-
+        <mat-icon (click)="ps.closePopups()" class="close-button">close</mat-icon>
     </div>
 
     @if (hideInfo) {
     <div class="arrow-button">
-        <img style="transform: rotate(180deg);" (click)="showInfoBox($event)"
-            src="assets/img/arr.png" alt="">
+        <img style="transform: rotate(180deg);" (click)="showInfoBox($event)" src="assets/img/arr.png" alt="">
     </div>
     }
 

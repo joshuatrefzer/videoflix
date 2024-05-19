@@ -14,20 +14,22 @@
 
 .popup {
     transition: all 300ms ease-in-out;
-    height: 80%;
-    width: 60%;
+    height: fit-content;
+    width: 640px;
     background-color: black;
-    border-radius: 20px;
-    box-shadow: 5px 5px 10px black;
+    border-radius: 5px;
+    box-shadow: 1px 1px 10px black;
     @include center-column();
-    @media (max-width:1000px) {
-        height: 90%;
-        width: 90%;
+
+    @media (max-width:680px) {
+        width: 100%;
+        height: 100dvh;
     }
 }
 
 .big-popup {
-    width: 80%;
+    scale: 1.5;
+
     @media (max-width:1000px) {
         width: 100% !important;
         height: 100% !important;
@@ -35,7 +37,7 @@
 }
 
 .top-container {
-    height: 80%;
+    height: fit-content;
     width: 100%;
     background-color: black;
     border-radius: 20px;
@@ -45,6 +47,7 @@
 .box {
     height: auto !important;
     align-items: flex-start !important;
+
     @media (max-width:1300px) {
         flex-direction: column;
     }
@@ -57,13 +60,15 @@
     background: linear-gradient(black, rgb(22, 22, 22));
     @include full-width($padding: 20px);
     @include center();
-    height: 30%;
-    border-bottom-right-radius: 20px;
-    border-bottom-left-radius: 20px;
+    height: 100px;
     color: white;
 
     span {
         font-weight: bold;
+    }
+
+    @media (max-width:680px) {
+        height: 100%;
     }
 }
 
@@ -73,11 +78,14 @@
     width: 50%;
     @include center-column();
     gap: 10px;
+
     .row {
         align-items: flex-start;
     }
 
 }
+
+
 
 .categories {
     font-weight: bold;
@@ -88,6 +96,7 @@
     font-size: 12px;
     font-weight: 300;
     width: 90%;
+
     @media (max-width:800px) {
         width: 95%;
     }
@@ -143,6 +152,7 @@
 
 
 .hide-infobox {
+    display: none;
     animation: slide-down 200ms ease-in-out;
     opacity: 0;
 }
@@ -152,8 +162,9 @@
         opacity: 1;
         transform: translateY(0);
     }
+
     100% {
-        opacity: 0;    
+        opacity: 0;
         transform: translateY(10%);
     }
 }
@@ -187,9 +198,15 @@
         cursor: pointer;
         width: 20px;
         transition: all 200ms ease-in-out;
+
         &:hover {
             opacity: 1;
         }
+    }
+
+    @media (max-width:680px) {
+        display: none;
+
     }
 }
 
@@ -197,8 +214,12 @@
     color: $red;
 }
 
-video {
-    width: 100%;
-    height: 100%;
-    border-radius: 20px;
+.close-button {
+    @include center();
+    height: 40px;
+    width: 40px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    @extend .text-button;
 }

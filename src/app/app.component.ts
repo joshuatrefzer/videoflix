@@ -9,13 +9,14 @@ import { VideoDetailComponent } from './video-detail/video-detail.component';
 import { environment } from '../environments/environment.development';
 import { LoaderComponent } from './loader/loader.component';
 import { BottomBarComponent } from "./bottom-bar/bottom-bar.component";
+import { FavoritesComponent } from './favorites/favorites.component';
 
 @Component({
     selector: 'app-root',
     standalone: true,
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss',
-    imports: [CommonModule, RouterOutlet, HeaderComponent, VideoComponent, VideoDetailComponent, LoaderComponent, BottomBarComponent]
+    imports: [CommonModule, RouterOutlet, HeaderComponent, VideoComponent, VideoDetailComponent, LoaderComponent, BottomBarComponent, FavoritesComponent]
 })
 export class AppComponent {
   title = 'videoflix';

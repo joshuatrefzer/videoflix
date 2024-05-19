@@ -9,7 +9,6 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-color: rgb(66, 66, 66);
-    border-radius: 5px;
     box-shadow: 1px 1px 10px black;
     position: relative;
     @include center();
@@ -31,7 +30,6 @@
     position: absolute;
     bottom: 0;
     left: 0;
-    border-radius: 5px;
     right: 0;
     width: auto;
     @include center($ai: flex-end);

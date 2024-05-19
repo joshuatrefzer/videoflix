@@ -8,28 +8,33 @@ export class PopupService {
 
 
   constructor() { }
-  errorMessage:string | undefined;
-  bg:boolean = false;
+  errorMessage: string | undefined;
+  bg: boolean = false;
   videoDetail: Video | undefined;
-  userPopup:boolean = false;
-  message:string | undefined;
-  isMobile:boolean = false;
-  activeLink: string = ''; 
+  userPopup: boolean = false;
+  message: string | undefined;
+  isMobile: boolean = false;
+  activeLink: string = '';
+  errorTimeout: any;
 
-  openPopup(){
+  openPopup() {
     this.bg = true;
   }
 
-  errorPopup(message:string){
+  errorPopup(message: string) {
     this.openPopup();
     this.errorMessage = message;
-    setTimeout(() => {
+    this.errorTimeout = setTimeout(() => {
       this.errorMessage = undefined;
       this.closePopups();
     }, 3000);
   }
 
-  messagePopup(message:string){
+  stopErrorTimeout() {
+    clearTimeout(this.errorTimeout); 
+  }
+
+  messagePopup(message: string) {
     this.openPopup();
     this.message = message;
     setTimeout(() => {
@@ -39,10 +44,11 @@ export class PopupService {
   }
 
 
-  closePopups(){
+  closePopups() {
     this.bg = false;
     this.userPopup = false;
     this.errorMessage = undefined;
+    this.stopErrorTimeout();
   }
-  
+
 }
