@@ -3,7 +3,8 @@ import { PopupService } from '../services/popup.service';
 import { environment } from '../../environments/environment.development';
 import { CommonModule } from '@angular/common';
 import { VideoPlayerComponent } from '../video-player/video-player.component';
-import {MatIconModule} from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
+import { BackendService } from '../services/backend.service';
 
 
 @Component({
@@ -17,7 +18,7 @@ export class VideoDetailComponent implements OnInit, OnDestroy {
 
 
 
-  constructor(public ps: PopupService, private elementRef: ElementRef) { }
+  constructor(public ps: PopupService, private elementRef: ElementRef, private backendService:BackendService) { }
 
   thumb: string = "";
   video: string = "";
@@ -28,6 +29,8 @@ export class VideoDetailComponent implements OnInit, OnDestroy {
   low: boolean = false;
   middle: boolean = true;
   high: boolean = false;
+
+  videoIsFavorite: boolean = false;
 
 
 
@@ -101,6 +104,27 @@ export class VideoDetailComponent implements OnInit, OnDestroy {
   showInfoBox(event: MouseEvent) {
     event.stopPropagation();
     this.hideInfo = false;
+  }
+  
+
+  addToFavorites(id: number | undefined, event:MouseEvent) {
+    event.stopPropagation();
+    if (id) {
+      console.log(this.backendService.favoriteList);
+       
+      this.backendService.favoriteList?.favorite_list.favorites.push(id);
+      this.backendService.updateFavoriteList();
+    }
+    this.videoIsFavorite = true;
+  }
+
+  removeFromFavorites(id: number | undefined, event:MouseEvent) {
+    event.stopPropagation();
+    if (id) {
+      console.log('Funktioniert');
+      
+    }
+    this.videoIsFavorite = false;
   }
 
 }

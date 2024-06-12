@@ -50,6 +50,9 @@
                 }
             </div>
 
+            <img *ngIf="!videoIsFavorite" (click)="addToFavorites(ps.videoDetail?.id, $event)"  class="like-button" src="assets/img/heart.svg" alt="">
+            <img *ngIf="videoIsFavorite" (click)="removeFromFavorites(ps.videoDetail?.id, $event)"  class="like-button" src="assets/img/heart-red.svg" alt="">
+
             <div class="arrow-button">
                 <img (click)="hideInfoBox()" src="assets/img/arr.png" alt="">
             </div>

@@ -3,6 +3,7 @@ import { SearchbarComponent } from '../searchbar/searchbar.component';
 import { NavigationEnd, Router, RouterLink, RouterModule } from '@angular/router';
 import { PopupService } from '../services/popup.service';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../services/auth.service';
 
 @Component({
     selector: 'app-header',
@@ -14,7 +15,7 @@ import { CommonModule } from '@angular/common';
 export class HeaderComponent {
     activeLink: string = '';
 
-    constructor(public router: Router, public ps: PopupService) { }
+    constructor(public router: Router, public ps: PopupService, private authService:AuthService) { }
 
     /**
   * Checks if the current active route matches the provided path.
@@ -36,6 +37,7 @@ export class HeaderComponent {
      * It opens the popup for the User to logout or delete account etc.
      */
     openPopup() {
+        this.authService.checkForGuestUser();
         this.ps.openPopup();
         this.ps.userPopup = true;
     }

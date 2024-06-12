@@ -34,6 +34,7 @@ export class HomescreenComponent implements OnInit {
    */
   ngOnInit(): void {
     this.backend.fetchVideoData();
+    this.backend.getFavoriteList();
   }
 
   /**

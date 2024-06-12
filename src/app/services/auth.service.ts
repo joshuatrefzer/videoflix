@@ -4,11 +4,13 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment.development';
 import { Router } from '@angular/router';
 import { PopupService } from './popup.service';
+import { log } from 'node:console';
 
 
 interface LoginResponse {
   token: string;
   user: {
+    id: number;
     email: string;
     first_name: string;
     last_name: string;
@@ -20,12 +22,14 @@ interface LoginResponse {
 })
 export class AuthService {
 
-  constructor(private http: HttpClient, private router: Router, private ps: PopupService) { }
+  constructor(private http: HttpClient, private router: Router, private ps: PopupService) {}
 
   userisLoggedIn = false;
   currentUser: User | undefined;
+  isGuest: boolean = false;
 
   guestUser: User = {
+    id: 49,
     firstname: "guest",
     lastname: "user",
     email: "videofix.joshuatrefzer@mailinator.com",
@@ -74,7 +78,7 @@ export class AuthService {
       } else if (error.status === 400) {
         this.ps.errorPopup("Please activate your account before login. Please check your mail.");
       }
-      
+
     });
   }
 
@@ -92,13 +96,16 @@ export class AuthService {
     }
   }
 
+  checkForGuestUser(){
+    if (this.isGuestUser()) {
+      this.isGuest = true;
+    }
+  }
+
   isGuestUser() {
-    if (this.currentUser?.email === this.guestUser.email &&
-      this.currentUser?.firstname === this.guestUser.firstname) {
-        return true;
-      } else {
-        return false;
-      }
+    this.getCurrentUser();
+    return this.currentUser?.email === this.guestUser?.email &&
+      this.currentUser?.firstname === this.guestUser?.firstname;
   }
 
 
@@ -108,7 +115,6 @@ export class AuthService {
       this.resetData();
     }, error => {
       this.ps.errorPopup('User not deleted successfully');
-
     });
   }
 
@@ -139,6 +145,7 @@ export class AuthService {
     if (!userString) return false;
     else {
       const user = JSON.parse(userString);
+      this.currentUser = user;
       return user;
     }
   }

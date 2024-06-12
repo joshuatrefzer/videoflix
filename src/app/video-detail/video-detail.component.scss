@@ -214,6 +214,19 @@
     color: $red;
 }
 
+.like-button {
+    height: 20px;
+    width: 20px;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    z-index: 100;
+    &:hover {
+        opacity: 0.8;
+        cursor: pointer;
+    }
+}
+
 .close-button {
     @include center();
     height: 40px;
