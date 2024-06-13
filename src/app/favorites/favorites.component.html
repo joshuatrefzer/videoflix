@@ -1,3 +1,28 @@
 <div class="content">
-    
+    @if (backendService.favoriteList?.favorite_videos?.length !== 0) {
+
+    @for (genre of genres; track $index) {
+
+
+    @if (backendService.filterFavoriteVideos(genre).length !== 0) {
+    <div class="row-container">
+        <div class="category">{{ genre.toUpperCase() }}</div>
+        <div class="video-rows">
+
+            @for (video of backendService.filterFavoriteVideos(genre); track $index) {
+            <app-video [video]="video"></app-video>
+            }
+
+        </div>
+    </div>
+    }
+    }
+
+    } @else {
+        <div class="novideos popup">
+            <div class="row">There are no favorite videos at this moment. You can add some favorites, by clicking the like button.</div>
+            <div class="row"><button (click)="navigateToHome()">BACK TO HOMESCREEN</button></div>
+        </div>
+    }
+
 </div>

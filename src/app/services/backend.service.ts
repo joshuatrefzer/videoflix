@@ -3,7 +3,7 @@ import { environment } from '../../environments/environment.development';
 import { HttpClient, HttpEventType, HttpProgressEvent } from '@angular/common/http';
 
 import { Observable, filter, take } from 'rxjs';
-import { FavoriteList, Video, VideoGenre } from './interface';
+import { FavoriteList, Video, VideoGenre, SimpleFavoriteList } from './interface';
 import { Router } from '@angular/router';
 import { PopupService } from './popup.service';
 import { AuthService } from './auth.service';
@@ -51,6 +51,17 @@ export class BackendService {
     let filteredVideos: Video[];
     if (genreToFilter) {
       filteredVideos = this.videos.filter(video => video.genre === genreToFilter);
+    } else {
+      filteredVideos = []
+    }
+    return filteredVideos;
+  }
+
+  filterFavoriteVideos(genreToFilter: VideoGenre): Video[] {
+    let filteredVideos: Video[];
+    const favoriteVideos = this.favoriteList?.favorite_videos;
+    if (genreToFilter && favoriteVideos) {
+      filteredVideos = favoriteVideos.filter(video => video.genre === genreToFilter);
     } else {
       filteredVideos = []
     }
@@ -120,12 +131,13 @@ export class BackendService {
     const data = {
       favorites: this.favoriteList.favorite_list.favorites
     }
-  
-    this.http.patch(url, data).pipe(take(1)).subscribe({
-      next: data => {
-        console.log(data);
-        
 
+    this.http.patch<SimpleFavoriteList>(url, data).pipe(take(1)).subscribe({
+      next: data => {
+        console.log(data.favorites);
+        if (this.favoriteList) {
+          this.favoriteList.favorite_list.favorites = data.favorites;
+        }
       },
       error: e => {
         console.log('error by put request', e);

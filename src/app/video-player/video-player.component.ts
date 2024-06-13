@@ -18,9 +18,7 @@ export class VideoPlayerComponent implements OnChanges, AfterViewInit {
 
   constructor(private elementRef: ElementRef) { }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log(this.video);
-  }
+  ngOnChanges(changes: SimpleChanges): void {}
 
   ngAfterViewInit() {
     this.videoPlayer = videojs(this.elementRef.nativeElement.querySelector('video'));

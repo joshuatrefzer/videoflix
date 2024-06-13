@@ -23,11 +23,12 @@ export interface User {
 }
 
 export interface FavoriteList {
-    favorite_list: {
-        id: number;
-        owner: string;
-        favorites: number[]
-    },
-    favorite_videos: number[]
+    favorite_list: SimpleFavoriteList
+    favorite_videos: Video[]
+}
 
+export interface SimpleFavoriteList {
+    id: number;
+    owner: string;
+    favorites: number[]
 }

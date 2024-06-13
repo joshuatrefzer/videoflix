@@ -18,7 +18,9 @@ export class VideoDetailComponent implements OnInit, OnDestroy {
 
 
 
-  constructor(public ps: PopupService, private elementRef: ElementRef, private backendService:BackendService) { }
+  constructor(public ps: PopupService, private elementRef: ElementRef, private backendService: BackendService) {
+
+  }
 
   thumb: string = "";
   video: string = "";
@@ -33,17 +35,34 @@ export class VideoDetailComponent implements OnInit, OnDestroy {
   videoIsFavorite: boolean = false;
 
 
-
-
   ngOnInit(): void {
     this.thumb = environment.baseUrl + this.ps.videoDetail?.thumbnail;
     this.video = environment.baseUrl + this.ps.videoDetail?.video_file;
+
+    if (this.isFavoriteVideo()) {
+      this.videoIsFavorite = true;
+    } else {
+      this.videoIsFavorite = false;
+    }
   }
 
   ngOnDestroy(): void {
     this.ps.videoDetail = undefined;
   }
 
+  isFavoriteVideo() {
+    debugger
+    const id = this.ps.videoDetail?.id;
+    if (!id) {
+      return false;
+    }
+    const favoriteList = this.backendService.favoriteList?.favorite_list.favorites;
+    if (!favoriteList) {
+      return false;
+    }
+    return favoriteList.includes(id);
+
+  }
 
   changeResolution(path: string, event: MouseEvent) {
     event.stopPropagation();
@@ -105,26 +124,26 @@ export class VideoDetailComponent implements OnInit, OnDestroy {
     event.stopPropagation();
     this.hideInfo = false;
   }
-  
 
-  addToFavorites(id: number | undefined, event:MouseEvent) {
+
+  addToFavorites(id: number | undefined, event: MouseEvent) {
     event.stopPropagation();
     if (id) {
-      console.log(this.backendService.favoriteList);
-       
       this.backendService.favoriteList?.favorite_list.favorites.push(id);
       this.backendService.updateFavoriteList();
     }
     this.videoIsFavorite = true;
   }
 
-  removeFromFavorites(id: number | undefined, event:MouseEvent) {
+  removeFromFavorites(id: number | undefined, event: MouseEvent) {
     event.stopPropagation();
-    if (id) {
-      console.log('Funktioniert');
-      
+    if (id && this.backendService.favoriteList) {
+      const index = this.backendService.favoriteList?.favorite_list.favorites.indexOf(id);
+      this.backendService.favoriteList?.favorite_list.favorites.splice(index, 1);
+      this.backendService.updateFavoriteList();
     }
     this.videoIsFavorite = false;
+    this.backendService.getFavoriteList();
   }
 
 }

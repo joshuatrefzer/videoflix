@@ -4,30 +4,32 @@ import { environment } from '../../environments/environment.development';
 import { HttpClient } from '@angular/common/http';
 import { take } from 'rxjs';
 import { BackendService } from '../services/backend.service';
+import { VideoGenre } from '../services/interface';
+import { VideoComponent } from '../video/video.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-favorites',
   standalone: true,
-  imports: [],
+  imports: [VideoComponent],
   templateUrl: './favorites.component.html',
   styleUrl: './favorites.component.scss'
 })
-export class FavoritesComponent implements OnInit {
-  constructor(private ps: PopupService, private http: HttpClient, private backendService: BackendService) {
+export class FavoritesComponent {
+  constructor(private ps: PopupService, private http: HttpClient, public backendService: BackendService, private router: Router) {
     this.ps.activeLink = '/favorites';
+    // backendService.getVideos();
+    backendService.getFavoriteList();
   }
 
-
-  ngOnInit(): void {
-    this.getList();
-  }
+  genres: VideoGenre[] = ["documentation", "blockbuster", "comedy", "action", "drama", "sitcom"];
 
 
-  getList() {
-    const url = environment.baseUrl + '/favorites/';
-    this.http.get(url).pipe(take(1)).subscribe(response => {
-      console.log(response);
-    })
+  /**
+   * Navigates to Uploadpage
+   */
+  navigateToHome() {
+    this.router.navigate(['/home']);
   }
 
 }
