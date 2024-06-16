@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
@@ -10,6 +10,7 @@ import { environment } from '../environments/environment.development';
 import { LoaderComponent } from './loader/loader.component';
 import { BottomBarComponent } from "./bottom-bar/bottom-bar.component";
 import { FavoritesComponent } from './favorites/favorites.component';
+import { BackendService } from './services/backend.service';
 
 @Component({
     selector: 'app-root',
@@ -18,12 +19,12 @@ import { FavoritesComponent } from './favorites/favorites.component';
     styleUrl: './app.component.scss',
     imports: [CommonModule, RouterOutlet, HeaderComponent, VideoComponent, VideoDetailComponent, LoaderComponent, BottomBarComponent, FavoritesComponent]
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'videoflix';
   deleteUserQuestion:boolean = false;
   screenWidth: number |undefined;
 
-  constructor(public authService: AuthService, private router: Router,  public popup: PopupService) {
+  constructor(public authService: AuthService, private router: Router,  public popup: PopupService, private backenService: BackendService) {
 
     this.router.events.subscribe(event => {
       if(event instanceof NavigationEnd){
@@ -74,6 +75,11 @@ export class AppComponent {
   navigateToLegals(){
     this.router.navigate(['/legals']);
     this.popup.closePopups();
+  }
+
+  ngOnInit(): void {
+      this.backenService.fetchVideoData();
+      this.backenService.getFavoriteList();
   }
 
 

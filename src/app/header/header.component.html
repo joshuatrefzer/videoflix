@@ -3,8 +3,11 @@
         <a class="movieflix" [routerLink]="['/home']"><span>MOVIEFLIX</span></a>
         <a [routerLink]="['/home']" [ngClass]="{'active-link': ps.activeLink === '/home'}">Home</a>
         <a [routerLink]="['/upload']" [ngClass]="{'active-link': ps.activeLink === '/upload'}">Upload</a>
-        <a [routerLink]="['/favorites']" [ngClass]="{'active-link': ps.activeLink === '/favorites'}">Favorites</a>
         <a [routerLink]="['/about']" [ngClass]="{'active-link': ps.activeLink === '/about'}">About</a>
+        <a class="favorite" [routerLink]="['/favorites']" [ngClass]="{'active-link': ps.activeLink === '/favorites'}">
+            <img style="height: 20px;" src="assets/img/heart.svg" alt="">
+            <span *ngIf="backendService.favoriteListLenght != 0" >{{ backendService.favoriteListLenght }}</span>
+        </a>
     </div>
     <div class="right">
         <app-searchbar></app-searchbar>

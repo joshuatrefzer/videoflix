@@ -15,16 +15,17 @@ import { Router } from '@angular/router';
   templateUrl: './favorites.component.html',
   styleUrl: './favorites.component.scss'
 })
-export class FavoritesComponent {
+export class FavoritesComponent implements OnInit {
   constructor(private ps: PopupService, private http: HttpClient, public backendService: BackendService, private router: Router) {
     this.ps.activeLink = '/favorites';
-    // backendService.getVideos();
-    backendService.getFavoriteList();
   }
 
   genres: VideoGenre[] = ["documentation", "blockbuster", "comedy", "action", "drama", "sitcom"];
 
 
+  ngOnInit(): void {
+    this.backendService.getFavoriteList();
+  }
   /**
    * Navigates to Uploadpage
    */

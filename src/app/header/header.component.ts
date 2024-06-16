@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SearchbarComponent } from '../searchbar/searchbar.component';
 import { NavigationEnd, Router, RouterLink, RouterModule } from '@angular/router';
 import { PopupService } from '../services/popup.service';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../services/auth.service';
+import { BackendService } from '../services/backend.service';
 
 @Component({
     selector: 'app-header',
@@ -15,7 +16,9 @@ import { AuthService } from '../services/auth.service';
 export class HeaderComponent {
     activeLink: string = '';
 
-    constructor(public router: Router, public ps: PopupService, private authService:AuthService) { }
+    constructor(public router: Router, public ps: PopupService, private authService: AuthService, public backendService: BackendService) {
+        backendService.getFavoriteList();
+     }
 
     /**
   * Checks if the current active route matches the provided path.

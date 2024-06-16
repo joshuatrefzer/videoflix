@@ -26,6 +26,8 @@ export class BackendService {
   uploadProgress: number = 0;
   uploadSuccessful: boolean = false;
 
+  favoriteListLenght: number = 0;
+
   constructor(private http: HttpClient, private router: Router, private ps: PopupService, private auth: AuthService) { }
 
   fetchVideoData() {
@@ -113,6 +115,8 @@ export class BackendService {
       this.http.post<FavoriteList>(this.favoriteListUrl, data).pipe(take(1)).subscribe({
         next: data => {
           this.favoriteList = data;
+          this.favoriteListLenght=  this.favoriteList.favorite_list.favorites.length;
+          
         },
         error: e => {
           this.favoriteList = undefined;
@@ -137,6 +141,8 @@ export class BackendService {
         console.log(data.favorites);
         if (this.favoriteList) {
           this.favoriteList.favorite_list.favorites = data.favorites;
+          this.favoriteListLenght=  data.favorites.length;
+          
         }
       },
       error: e => {

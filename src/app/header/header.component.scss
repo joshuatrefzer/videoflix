@@ -47,3 +47,26 @@ header {
     padding-left: 25px;
     @include center();
 }
+
+.favorite {
+    position: relative;
+
+    span {
+        position: absolute;
+        bottom: -5px;
+        right: -10px;
+        color: white;
+        font-size: 10px;
+        background-color: rgb(158, 43, 43);
+        height: 10px;
+        width: 10px;
+        padding: 3px;
+        @include center();
+        border-radius: 50%;
+        z-index: 30;
+    }
+
+    img {
+        height: 20px;
+    }
+}

@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { VideoPlayerComponent } from '../video-player/video-player.component';
 import { MatIconModule } from '@angular/material/icon';
 import { BackendService } from '../services/backend.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -18,7 +19,7 @@ export class VideoDetailComponent implements OnInit, OnDestroy {
 
 
 
-  constructor(public ps: PopupService, private elementRef: ElementRef, private backendService: BackendService) {
+  constructor(public ps: PopupService, private elementRef: ElementRef, private backendService: BackendService, private router: Router) {
 
   }
 
@@ -144,6 +145,9 @@ export class VideoDetailComponent implements OnInit, OnDestroy {
     }
     this.videoIsFavorite = false;
     this.backendService.getFavoriteList();
+    console.log(this.router.url);
   }
+  
+   
 
 }
