@@ -59,8 +59,8 @@
     padding-right: 20px;
     background: linear-gradient(black, rgb(22, 22, 22));
     @include full-width($padding: 20px);
-    @include center();
-    height: 100px;
+    @include center($ai: flex-start);
+    height: fit-content;
     color: white;
 
     span {

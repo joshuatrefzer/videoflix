@@ -15,7 +15,7 @@
     padding: 40px;
     padding-bottom: 120px;
     background-color: black;
-    border-radius: 20px;
+    border-radius: 10px;
     position: relative;
     max-height: 60vh;
     overflow-y: scroll;
@@ -31,7 +31,11 @@
 .top {
     @include full-width();
     height: 20%;
-    text-align: center
+    text-align: center;
+    margin-bottom: 10px;
+    span {
+        font-weight: 200;
+    }
 }
 
 .bottom {
