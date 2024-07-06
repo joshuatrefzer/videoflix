@@ -11,10 +11,18 @@ export class SearchService {
 
 
   constructor(private http: HttpClient, private ps: PopupService) { }
-  searchResult: Video[] = []; 
-  value:string = '';
-  loader:boolean = false;
+  searchResult: Video[] = [];
+  value: string = '';
+  loader: boolean = false;
 
+  /**
+ * Searches for videos based on the provided search value.
+ * Sends a POST request with the search title to the server.
+ * Updates the search results and hides the loader upon a successful response.
+ * Displays an error popup if the search request fails.
+ *
+ * @param {string} searchValue - The value to search for.
+ */
   search(searchValue: string) {
     this.loader = true;
     const url = environment.baseUrl + '/api/videos/search/';
@@ -29,8 +37,6 @@ export class SearchService {
       this.ps.errorPopup(`Error by searching "${searchValue}"`);
     });
   }
-
-
 
 
 }

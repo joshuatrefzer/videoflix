@@ -33,8 +33,8 @@ export class HomescreenComponent implements OnInit {
    * A function "fetchVideoData" in Backend Service Intance is called. When the Component starts their livecycle.
    */
   ngOnInit(): void {
-    // this.backend.fetchVideoData();
-    // this.backend.getFavoriteList();
+    this.backend.fetchVideoData();
+    this.backend.getFavoriteList();
   }
 
   /**

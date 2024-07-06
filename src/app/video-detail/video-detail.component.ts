@@ -36,6 +36,9 @@ export class VideoDetailComponent implements OnInit, OnDestroy {
   videoIsFavorite: boolean = false;
 
 
+  /**
+ * Initializes component data on component initialization.
+ */
   ngOnInit(): void {
     this.thumb = environment.baseUrl + this.ps.videoDetail?.thumbnail;
     this.video = environment.baseUrl + this.ps.videoDetail?.video_file;
@@ -47,12 +50,18 @@ export class VideoDetailComponent implements OnInit, OnDestroy {
     }
   }
 
+  /**
+   * Cleans up resources when the component is destroyed.
+   */
   ngOnDestroy(): void {
     this.ps.videoDetail = undefined;
   }
 
+  /**
+   * Checks if the current video is in the user's list of favorite videos.
+   * @returns True if the video is a favorite, false otherwise.
+   */
   isFavoriteVideo() {
-    debugger
     const id = this.ps.videoDetail?.id;
     if (!id) {
       return false;
@@ -62,22 +71,32 @@ export class VideoDetailComponent implements OnInit, OnDestroy {
       return false;
     }
     return favoriteList.includes(id);
-
   }
 
+  /**
+   * Changes the resolution of the video.
+   * @param path - New resolution path.
+   * @param event - Mouse event that triggered the change.
+   */
   changeResolution(path: string, event: MouseEvent) {
     event.stopPropagation();
     this.resolutionUpdate(path);
     this.closeResolutionButtons();
   }
 
-
+  /**
+   * Updates the video resolution.
+   * @param path - New resolution path.
+   */
   resolutionUpdate(path: string) {
     this.resetResolutionVars();
     const videoBase = environment.baseUrl + this.ps.videoDetail?.video_file;
     this.video = videoBase.replace(".mp4", path);
   }
 
+  /**
+   * Closes the resolution selection buttons after a delay.
+   */
   closeResolutionButtons() {
     setTimeout(() => {
       this.hideResolution = true;
@@ -88,45 +107,73 @@ export class VideoDetailComponent implements OnInit, OnDestroy {
     }, 750);
   }
 
+  /**
+   * Resets resolution selection variables.
+   */
   resetResolutionVars() {
     this.low = false;
     this.middle = false;
     this.high = false;
   }
 
+  /**
+   * Shows the resolution selection.
+   * @param event - Mouse event that triggered the show.
+   */
   showResolution(event: MouseEvent) {
     event?.stopPropagation();
     this.resolution = true;
   }
 
-
-
+  /**
+   * Handles click events outside the popup container to close the popup.
+   * @param event - Mouse event that triggered the container click.
+   */
   handleContainerClick(event: MouseEvent) {
     if (!this.elementRef.nativeElement.querySelector('.popup').contains(event.target)) {
       this.closePopup();
     }
   }
 
+  /**
+   * Handles click events inside the popup to stop propagation.
+   * @param event - Mouse event that triggered the popup click.
+   */
   handlePopupClick(event: MouseEvent) {
     event.stopPropagation();
   }
 
+  /**
+   * Closes the popup and cleans up related resources.
+   */
   closePopup() {
     this.ps.bg = false;
     this.ps.videoDetail = undefined;
   }
 
-
+  /**
+   * Hides the information box.
+   */
   hideInfoBox() {
     this.hideInfo = true;
   }
 
+  /**
+   * Shows the information box.
+   * @param event - Mouse event that triggered the show.
+   */
   showInfoBox(event: MouseEvent) {
     event.stopPropagation();
     this.hideInfo = false;
   }
 
 
+
+  /**
+ * Adds the specified video ID to the user's list of favorite videos.
+ * @param id - The ID of the video to add to favorites.
+ * @param event - The mouse event that triggered the action.
+ */
   addToFavorites(id: number | undefined, event: MouseEvent) {
     event.stopPropagation();
     if (id) {
@@ -136,18 +183,24 @@ export class VideoDetailComponent implements OnInit, OnDestroy {
     this.videoIsFavorite = true;
   }
 
+  /**
+   * Removes the specified video ID from the user's list of favorite videos.
+   * @param id - The ID of the video to remove from favorites.
+   * @param event - The mouse event that triggered the action.
+   */
   removeFromFavorites(id: number | undefined, event: MouseEvent) {
     event.stopPropagation();
     if (id && this.backendService.favoriteList) {
       const index = this.backendService.favoriteList?.favorite_list.favorites.indexOf(id);
-      this.backendService.favoriteList?.favorite_list.favorites.splice(index, 1);
-      this.backendService.updateFavoriteList();
+      if (index !== -1) {
+        this.backendService.favoriteList?.favorite_list.favorites.splice(index, 1);
+        this.backendService.updateFavoriteList();
+      }
     }
     this.videoIsFavorite = false;
     this.backendService.getFavoriteList();
     console.log(this.router.url);
   }
-  
-   
 
+  
 }
