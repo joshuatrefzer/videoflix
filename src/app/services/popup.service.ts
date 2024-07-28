@@ -64,7 +64,7 @@ export class PopupService {
     setTimeout(() => {
       this.message = undefined;
       this.closePopups();
-    }, 3000);
+    }, 8000);
   }
 
 

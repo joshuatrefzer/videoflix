@@ -55,13 +55,11 @@ body {
 
 }
 
+@font-face {
+    font-family: 'roboto';
+    src: url('assets/fonts/Roboto-Regular.ttf');
+}
 
-// --sb-track-color: #252525;
-// --sb-thumb-color: #616161;
-// --sb-size: 1px;
-
-// scrollbar-color: var(--sb-thumb-color) 
-//                  var(--sb-track-color);
 
 
 ::-webkit-scrollbar {

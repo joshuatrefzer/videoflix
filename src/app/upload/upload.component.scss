@@ -12,6 +12,7 @@
 .input-container {
     @include center-column();
     width: 70%;
+    max-width: 1300px;
     padding: 40px;
     padding-bottom: 120px;
     background-color: black;
