@@ -1,13 +1,11 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
 import { HttpClient, HttpEventType, HttpProgressEvent } from '@angular/common/http';
-
 import { Observable, filter, take } from 'rxjs';
 import { FavoriteList, Video, VideoGenre, SimpleFavoriteList } from './interface';
 import { Router } from '@angular/router';
 import { PopupService } from './popup.service';
 import { AuthService } from './auth.service';
-import { error, log } from 'console';
 
 
 
@@ -164,7 +162,7 @@ export class BackendService {
         },
         error: e => {
           this.favoriteList = undefined;
-          console.log('Error by fetching the list', e);
+          this.ps.errorPopup('Error by fetching the list');
         },
       });
     }
@@ -189,14 +187,13 @@ export class BackendService {
 
     this.http.patch<SimpleFavoriteList>(url, data).pipe(take(1)).subscribe({
       next: data => {
-        console.log(data.favorites);
         if (this.favoriteList) {
           this.favoriteList.favorite_list.favorites = data.favorites;
           this.favoriteListLenght = data.favorites.length;
         }
       },
       error: e => {
-        console.log('error by put request', e);
+        this.ps.errorPopup('Error by PUT Request');
       }
     });
   }

@@ -9,14 +9,14 @@
         <form [formGroup]="movieForm" (ngSubmit)="onSubmit()" class="bottom">
             <div class="left">
                 <input type="text" placeholder="Title" formControlName="title"
-                    [ngClass]="{'invalid': isInvalid('title'), 'valid':isValidInput('title')}">
+                    [ngClass]="{'invalid': isInvalid('title'), 'valid':isValidInput('title')}" pattern="[a-zA-Z0-9]*">
                 <div class="error-container">
                     <div *ngIf="requiredErrors('title')" class="errors">title is required</div>
                     <div *ngIf="minLengthError('title')" class="errors">title must have a minimum of 4 character</div>
                 </div>
 
                 <input type="text" placeholder="Actors" formControlName="actors"
-                    [ngClass]="{'invalid': isInvalid('actors'), 'valid':isValidInput('actors')}">
+                    [ngClass]="{'invalid': isInvalid('actors'), 'valid':isValidInput('actors')}" pattern="[a-zA-Z0-9]*">
                 <div class="error-container">
                     <div *ngIf="requiredErrors('actors')" class="errors">actors are required</div>
                     <div *ngIf="minLengthError('actors')" class="errors">actors must have a minimum of 4 character</div>
@@ -35,7 +35,7 @@
 
             <div class="right">
                 <textarea type="text" placeholder="Description" formControlName="description"
-                    [ngClass]="{'invalid': isInvalid('description'), 'valid':isValidInput('description')}"></textarea>
+                    [ngClass]="{'invalid': isInvalid('description'), 'valid':isValidInput('description')}" pattern="[a-zA-Z0-9]*"></textarea>
                 <div class="error-container">
                     <div *ngIf="requiredErrors('description')" class="errors">description is required</div>
                     <div *ngIf="minLengthError('description')" class="errors">your description must have a minimum of 15

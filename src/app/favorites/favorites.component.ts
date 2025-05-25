@@ -26,6 +26,7 @@ export class FavoritesComponent implements OnInit {
   ngOnInit(): void {
     this.backendService.getFavoriteList();
   }
+
   /**
    * Navigates to Uploadpage
    */

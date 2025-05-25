@@ -199,7 +199,6 @@ export class VideoDetailComponent implements OnInit, OnDestroy {
     }
     this.videoIsFavorite = false;
     this.backendService.getFavoriteList();
-    console.log(this.router.url);
   }
 
   

@@ -3,7 +3,7 @@
     @if(isSearchExpanded){
         <div class="container-search">
             <input [class.hide]="hide" class="input-animation" type="text" placeholder="Search..."
-                (keyup)="startSearch()" [(ngModel)]="searchValue">
+                (keyup)="startSearch()" [(ngModel)]="searchValue" pattern="[a-zA-Z0-9]*">
         </div>
     }
 
