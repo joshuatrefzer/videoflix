@@ -61,13 +61,13 @@ export class ForgotpasswordComponent {
   * @param {FormData} formData - A FormData object containing the email address (`email`).
   */
   resetPasswordRequest(url: string, formData: FormData) {
-    this.auth.loader = true;
+    this.auth.loader.set(true);
     this.http.post(url, formData).subscribe(res => {
-      this.auth.loader = false;
+      this.auth.loader.set(false);
       this.ps.messagePopup('Please check your mail! We`ve sended you a reset link');
       this.emailForm.reset();
     }, error => {
-      this.auth.loader = false;
+      this.auth.loader.set(false);
       this.ps.errorPopup('The request to reset your password failed');
     });
   }

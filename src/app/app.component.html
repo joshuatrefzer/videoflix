@@ -1,11 +1,11 @@
 <div [ngClass]="{'blur': this.popup.bg}">
 
 
-    @if(this.authService.userisLoggedIn){
+    @if(this.authService.userisLoggedIn()){
     <app-header></app-header>
     }
 
-    @if(this.authService.userisLoggedIn){
+    @if(this.authService.userisLoggedIn()){
         <app-bottom-bar></app-bottom-bar>
     }
 
@@ -44,7 +44,7 @@
     
 </div>
 
-<app-loader class="full-screen" *ngIf="this.authService.loader"></app-loader>
+<app-loader class="full-screen" *ngIf="this.authService.loader()"></app-loader>
 
 <div *ngIf="popup.errorMessage" class="error-popup">{{ popup.errorMessage }}</div>
 <div *ngIf="popup.message" class="message-popup">{{ popup.message }}</div>

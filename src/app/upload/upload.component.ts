@@ -37,22 +37,11 @@ export class UploadComponent {
     this.ps.activeLink = '/upload';
   }
 
-
-  /**
- * Handles the selection of a video file.
- * @param {any} event - The event object triggered by the file selection.
- */
   onVideoSelected(event: any): void {
-    /**
-     * The selected file.
-     * @type {File}
-     */
+   
     const file: File = event.target.files[0];
     if (file) {
-      /**
-       * The type of the selected file.
-       * @type {string}
-       */
+
       const fileType = file.type;
 
       if (fileType === 'video/mp4') {
@@ -66,16 +55,7 @@ export class UploadComponent {
     }
   }
 
-
-  /**
- * Handles the selection of a thumbnail image file.
- * @param {any} event - The event object triggered by the file selection.
- */
   onThumbnailSelected(event: any): void {
-    /**
-     * The selected file.
-     * @type {File}
-     */
     const file: File = event.target.files[0];
     if (file) {
       if (this.checkForFormat(file)) {
@@ -88,22 +68,10 @@ export class UploadComponent {
     }
   }
 
-
-  /**
- * Checks if the selected file is in a valid image format (JPEG or PNG).
- * @param {File} file - The file to be checked.
- * @returns {boolean} - Returns true if the file format is valid (JPEG or PNG), otherwise false.
- */
   checkForFormat(file: File): boolean {
     return file.type === 'image/jpeg' || file.type === 'image/png';
   }
 
-
-  /**
- * Submits the movie form if all required fields are filled with valid data.
- * If successful, uploads the video and thumbnail files.
- * If any required fields are missing or contain invalid data, displays an error message.
- */
   onSubmit(): void {
     if (this.selectedThumbnail && this.selectedVideo && this.isFormValid()) {
       const formData = new FormData();
@@ -120,52 +88,25 @@ export class UploadComponent {
     }
   }
 
-
-  /**
- * Checks if the movie form is valid and both the thumbnail and video are selected.
- * @returns {boolean} - Returns true if the form is valid and both the thumbnail and video are selected, otherwise false.
- */
   isFormValid() {
     return this.movieForm.valid && this.selectedThumbnail && this.selectedVideo;
   }
 
-
-  /**
- * Resets the movie form and sets the inputFinished flag to true.
- */
   resetFields(): void {
     this.movieForm.reset();
     this.inputFinished = true;
   }
 
-
-  /**
- * Retrieves a form field by its key.
- * @param {string} key - The key of the field to retrieve.
- * @returns Returns the form field if found, otherwise null.
- */
   getField(key: string) {
     let myForm = this.movieForm;
     let field = myForm?.get(key);
     return field;
   }
 
-
-  /**
- * Checks if a form field is dirty or touched.
- * @param {any} field - The form field to check.
- * @returns {boolean} - Returns true if the field is dirty or touched, otherwise false.
- */
   dirtyTouched(field: any): boolean {
     return field.dirty || field.touched;
   }
 
-
-  /**
-   * Checks if a form field is invalid.
-   * @param {string} key - The key of the form field to check.
-   * @returns {boolean} - Returns true if the field is invalid and dirty/touched, otherwise false.
-   */
   isInvalid(key: string): boolean {
     const field = this.getField(key);
     if (field) {
@@ -176,11 +117,6 @@ export class UploadComponent {
   }
 
 
-  /**
- * Checks if a form field has valid input.
- * @param {string} key - The key of the form field to check.
- * @returns {boolean} - Returns true if the field has valid input, otherwise false.
- */
   isValidInput(key: string): boolean {
     const field = this.getField(key);
     if (field) {
@@ -190,13 +126,6 @@ export class UploadComponent {
     }
   }
 
-
-
-  /**
- * Checks if a required field has errors.
- * @param {string} key - The key of the form field to check.
- * @returns {boolean} - Returns true if the required field has errors and is dirty/touched, otherwise false.
- */
   requiredErrors(key: string): boolean {
     const field = this.getField(key);
     if (field) {
@@ -206,12 +135,6 @@ export class UploadComponent {
     }
   }
 
-
-  /**
- * Retrieves the minimum length error of a form field.
- * @param {string} key - The key of the form field to check.
- * @returns {ValidationErrors | null} - Returns the minimum length error if present, otherwise null.
- */
   minLengthError(key: string) {
     const field = this.getField(key);
     if (field) {

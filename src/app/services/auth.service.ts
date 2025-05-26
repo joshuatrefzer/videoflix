@@ -24,7 +24,7 @@ export class AuthService {
 
   url:string = environment.baseUrl;
   userisLoggedIn = signal<boolean>(false);
-  currentUser = signal<User | undefined>(undefined);
+  currentUser: User | undefined;
   isGuest = signal<boolean>(false);
   loader = signal<boolean>(false);
   mailSendFeedback = signal<boolean>(false);
@@ -94,7 +94,7 @@ export class AuthService {
     if (this.isGuestUser()) {
       this.resetData();
     } else {
-      this.sendLogoutRequest();
+      await this.sendLogoutRequest();
     }
   }
 
@@ -105,7 +105,8 @@ export class AuthService {
     } catch (error) {
       this.ps.errorPopup('Not successfully logged out');
     }
-
+    this.loader.set(false);
+    this.router.navigate(['/authentication']);
   }
 
   public checkForGuestUser() {
@@ -116,8 +117,8 @@ export class AuthService {
 
   private isGuestUser() {
     this.getCurrentUser();
-    return this.currentUser()?.email === this.guestUser?.email &&
-      this.currentUser()?.firstname === this.guestUser?.firstname;
+    return this.currentUser?.email === this.guestUser?.email &&
+      this.currentUser?.firstname === this.guestUser?.firstname;
   }
 
   async deleteUser(){
@@ -133,7 +134,7 @@ export class AuthService {
   private resetData() {
     localStorage.removeItem('token');
     localStorage.removeItem('currentUser');
-    this.currentUser.set(undefined);
+    this.currentUser = undefined;
     this.userisLoggedIn.set(false);
     this.router.navigate(['/authentication']);
     this.loader.set(false);

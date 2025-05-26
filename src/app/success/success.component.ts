@@ -15,7 +15,7 @@ export class SuccessComponent {
   constructor(private router: Router, private auth: AuthService) {
     this.startCount();
 
-    if (this.auth.userisLoggedIn) {
+    if (this.auth.userisLoggedIn()) {
       this.router.navigate(['/home'])
     }
   }

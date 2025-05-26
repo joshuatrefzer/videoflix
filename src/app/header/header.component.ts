@@ -20,25 +20,13 @@ export class HeaderComponent {
         backendService.getFavoriteList();
      }
 
-    /**
-  * Checks if the current active route matches the provided path.
-  *
-  * This function takes a string representing the desired path. It then compares this path to the current URL retrieved from the `router.url` property.
-  *
-  * The function returns `true` if the current URL exactly matches the provided path, indicating the route is active. Otherwise, it returns `false`.
-  *
-  * @param {string} path - The path to check for active route.
-  * @returns {boolean} - True if the route for the provided path is active, false otherwise.
-  */
+
     isActive(path: string): boolean {
         return this.router.url === path;
     }
 
 
-    /**
-     * Triggers function in "ps" - Popupservice Instance.
-     * It opens the popup for the User to logout or delete account etc.
-     */
+
     openPopup() {
         this.authService.checkForGuestUser();
         this.ps.openPopup();

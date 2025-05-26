@@ -75,7 +75,6 @@ option {
     width: 90%;
     height: 50px;
     margin-top: 15px;
-    border: 1px solid black;
 }
 
 select {
@@ -159,7 +158,7 @@ button {
 textarea {
     @extend input;
     border-radius: 10px;
-    background-color: rgb(67, 67, 67);
+    background-color: rgb(43, 43, 43);
     opacity: 0.8;
     font-size: 15px;
     font-family: sans-serif;
@@ -167,7 +166,6 @@ textarea {
     height: 80px;
     padding: 10px;
     color: white;
-    border: 1px solid black;
 }
 
 textarea:focus {

@@ -34,7 +34,7 @@
 
 
     @else if(directTo == 'signUp'){
-        @if (!this.as.mailSendFeedback) {
+        @if (!this.as.mailSendFeedback()) {
 
     <form class="login sign-up" [formGroup]="signUpForm" (ngSubmit)="signUp()">
         <h1>SIGN UP</h1>

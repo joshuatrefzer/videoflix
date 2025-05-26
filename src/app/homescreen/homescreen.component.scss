@@ -18,7 +18,8 @@
     @include center-column($jc:flex-start);
     min-height: 210px;
     background-color: $bg-black;
-    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.548);
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.334);
+    border-radius: 10px;
     @media (max-width:800px) {
         box-shadow: none;
     }
