@@ -9,7 +9,7 @@ import { PopupService } from '../services/popup.service';
 @Component({
   selector: 'app-auth',
   standalone: true,
-  imports: [FormsModule, CommonModule, ReactiveFormsModule, LoaderComponent],
+  imports: [FormsModule, CommonModule, ReactiveFormsModule],
   templateUrl: './auth.component.html',
   styleUrl: './auth.component.scss'
 })
@@ -21,6 +21,7 @@ export class AuthComponent {
   signUpForm: FormGroup;
 
   constructor(public as: AuthService, private router: Router, private formBuilder: FormBuilder, public ps: PopupService) {
+    
     this.loginForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required, Validators.minLength(5)])
@@ -35,12 +36,9 @@ export class AuthComponent {
     });
 
     if (this.as.isUserLoggedIn()) this.router.navigate(['/home']);
-  
   }
 
-  /**
-   * Uses data from guest user account and prepares data for request. 
-   */
+
   guestLogin() {
     const userData = new FormData();
     if (this.as.guestUser.password) {
@@ -50,9 +48,6 @@ export class AuthComponent {
     }
   }
 
-  /**
-   * Uses data from loginform. Valid data is prepared for request.
-   */
   logIn() {
     if (this.loginForm.valid) {
       const userData = new FormData();
@@ -65,9 +60,6 @@ export class AuthComponent {
   }
 
 
-  /**
-   * Uses data from signupform. Valid data is prepared for request.
-   */
   signUp() {
     if (this.signUpForm.valid) {
       const formData = new FormData();
@@ -83,23 +75,16 @@ export class AuthComponent {
     }
   }
 
-  /**
-   * navigates to forgot password formular in the frontend
-   */
+
   forgotPW() {
     this.router.navigate(['/forgotpassword']);
   }
 
-  /**
-   * 
-   * @param key shows right formular in the frontend, and handles navigation between the two formulars
-   */
   direct(key: "signUp" | "login") {
     this.directTo = key;
     this.loginForm.reset();
     this.signUpForm.reset();
   }
-
 
 
 
@@ -191,7 +176,7 @@ export class AuthComponent {
 
 
   redirect() {
-    this.as.mailSendFeedback = false;
+    this.as.mailSendFeedback.set(false);
     this.directTo = 'login';
   }
 

@@ -21,9 +21,9 @@
         </div>
 
         <div class="row" style="margin-top: 10px;">
-            <a (click)="forgotPW()" >forgot password?</a>
+            <a (click)="forgotPW()">forgot password?</a>
         </div>
-        
+
         <div class="question">Do you haven't registered yet? Please click <a (click)="direct('signUp'); ">here</a> to
             sign up.</div>
         <div class="row"><a (click)="guestLogin()" class="guest">GUEST LOGIN</a></div>
@@ -34,7 +34,7 @@
 
 
     @else if(directTo == 'signUp'){
-    @if (!this.as.mailSendFeedback) {
+        @if (!this.as.mailSendFeedback) {
 
     <form class="login sign-up" [formGroup]="signUpForm" (ngSubmit)="signUp()">
         <h1>SIGN UP</h1>

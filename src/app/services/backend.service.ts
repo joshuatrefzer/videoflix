@@ -39,10 +39,10 @@ export class BackendService {
       {
         next: (data: Video[]) => {
           this.videos = data;
-          this.auth.loader = false;
+          this.auth.loader.set(false);
         },
         error: error => {
-          this.auth.loader = true;
+          this.auth.loader.set(false);
           this.ps.errorPopup('Error by loading data from backend');
         }
       }
@@ -152,7 +152,7 @@ export class BackendService {
   * Updates the favorite list length and handles errors if the fetch fails.
   */
   getFavoriteList() {
-    const userId = this.auth.currentUser ? this.auth.currentUser.id : null;
+    const userId = this.auth.currentUser ? this.auth.currentUser()?.id : null;
     if (userId) {
       const data = { user_id: userId };
       this.http.post<FavoriteList>(this.favoriteListUrl, data).pipe(take(1)).subscribe({
