@@ -1,3 +1,3 @@
 export const environment = {
-    baseUrl: 'http://localhost:8080',
+    baseUrl: 'https://videoflix.joshuatrefzer-backend.com',
 };
