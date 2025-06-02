@@ -41,7 +41,7 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router, private ps: PopupService) { }
 
 
-  async signUp(userData: FormData) {
+  async signUp(userData: Partial<User>) {
     this.loader.set(true);
     const url = this.url + '/users/register/';
   
@@ -62,7 +62,7 @@ export class AuthService {
     }
   }
 
-  async login(userData: FormData) {
+  async login(userData:Partial<User>) {
     this.loader.set(true);
     const url = this.url + '/users/login/';
   

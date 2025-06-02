@@ -1,3 +1,3 @@
 export const environment = {
-    baseUrl: "videoflix.joshuatrefzer-backend-apis.site",
+    baseUrl: "https://videoflix.joshuatrefzer-backend-apis.site",
 };

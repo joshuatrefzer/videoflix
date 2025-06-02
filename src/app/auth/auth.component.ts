@@ -5,6 +5,7 @@ import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, 
 import { CommonModule } from '@angular/common';
 import { LoaderComponent } from '../loader/loader.component';
 import { PopupService } from '../services/popup.service';
+import { User } from '../services/interface';
 
 @Component({
   selector: 'app-auth',
@@ -21,7 +22,7 @@ export class AuthComponent {
   signUpForm: FormGroup;
 
   constructor(public as: AuthService, private router: Router, private formBuilder: FormBuilder, public ps: PopupService) {
-    
+
     this.loginForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required, Validators.minLength(5)])
@@ -40,19 +41,27 @@ export class AuthComponent {
 
 
   guestLogin() {
-    const userData = new FormData();
+    const userData = {
+      email: this.as.guestUser.email,
+      password: this.as.guestUser.password
+    };
     if (this.as.guestUser.password) {
-      userData.append('email', this.as.guestUser.email);
-      userData.append('password', this.as.guestUser.password);
       this.as.login(userData);
     }
   }
 
+  private getLoginFormData(): Partial<User>{
+     const userData = {
+      email: this.loginForm.get('email')?.value,
+      password: this.loginForm.get('password')?.value
+    };
+
+    return userData;
+  }
+
   logIn() {
     if (this.loginForm.valid) {
-      const userData = new FormData();
-      userData.append('email', this.loginForm.get('email')?.value);
-      userData.append('password', this.loginForm.get('password')?.value);
+      const userData = this.getLoginFormData();
       this.as.login(userData);
     } else {
       this.ps.errorPopup('please fill all fields with valid data');
@@ -62,17 +71,22 @@ export class AuthComponent {
 
   signUp() {
     if (this.signUpForm.valid) {
-      const formData = new FormData();
-      formData.append('first_name', this.signUpForm.get('firstname')?.value);
-      formData.append('last_name', this.signUpForm.get('lastname')?.value);
-      formData.append('email', this.signUpForm.get('email')?.value);
-      formData.append('password', this.signUpForm.get('password')?.value);
-      formData.append('username', this.signUpForm.get('firstname')?.value + '_' + this.signUpForm.get('lastname')?.value);
-
-      this.as.signUp(formData);
+      const data = this.getSignupFormData();
+      this.as.signUp(data);
     } else {
       this.ps.errorPopup('please fill all fields with valid data');
     }
+  }
+
+  getSignupFormData(): Partial<User> {
+    const data = {
+      first_name: this.signUpForm.get('firstname')?.value,
+      last_name: this.signUpForm.get('lastname')?.value,
+      email: this.signUpForm.get('email')?.value,
+      password: this.signUpForm.get('password')?.value,
+      username: this.signUpForm.get('firstname')?.value + '_' + this.signUpForm.get('lastname')?.value
+    }
+    return data;
   }
 
 
