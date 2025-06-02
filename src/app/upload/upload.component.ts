@@ -24,6 +24,8 @@ export class UploadComponent {
   genres: VideoGenre[];
 
   inputFinished: boolean = false;
+  uploadProgress: number = 0;
+  showProgress: boolean = false;
 
 
   constructor(private formBuilder: FormBuilder, public bs: BackendService, public ps: PopupService) {
@@ -38,7 +40,7 @@ export class UploadComponent {
   }
 
   onVideoSelected(event: any): void {
-   
+
     const file: File = event.target.files[0];
     if (file) {
 
@@ -83,9 +85,23 @@ export class UploadComponent {
       formData.append('video_file', this.selectedVideo);
       this.resetFields();
       this.bs.uploadVideo(formData);
+      this.startUploadAnimation();
     } else {
       this.ps.errorPopup('Please fill all fields with valid data. Are you using the correct video and image formats?');
     }
+  }
+
+  startUploadAnimation() {
+    this.uploadProgress = 0;
+    this.showProgress = true;
+
+    const interval = setInterval(() => {
+      if (this.uploadProgress >= 100) {
+        clearInterval(interval);
+      } else {
+        this.uploadProgress += 1;
+      }
+    }, 15);
   }
 
   isFormValid() {

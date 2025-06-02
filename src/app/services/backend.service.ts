@@ -19,7 +19,6 @@ export class BackendService {
 
   favoriteList: FavoriteList | undefined;
   videos: Video[] = [];
-  uploadProgress: number = 0;
   uploadSuccessful: boolean = false;
 
   favoriteListLenght: number = 0;
@@ -74,16 +73,6 @@ export class BackendService {
       this.ps.errorPopup('Error by uploading data');
       this.router.navigate(['/home']);
     }
-  }
-
-  getUploadProgress(event: HttpProgressEvent) {
-    let percentDone: number;
-    if (event.total) {
-      percentDone = Math.round(100 * event.loaded / event.total);
-    } else {
-      percentDone = event.loaded;
-    }
-    this.uploadProgress = percentDone;
   }
 
   finishUpload() {
