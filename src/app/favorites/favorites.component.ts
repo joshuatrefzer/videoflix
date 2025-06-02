@@ -27,9 +27,6 @@ export class FavoritesComponent implements OnInit {
     this.backendService.getFavoriteList();
   }
 
-  /**
-   * Navigates to Uploadpage
-   */
   navigateToHome() {
     this.router.navigate(['/home']);
   }

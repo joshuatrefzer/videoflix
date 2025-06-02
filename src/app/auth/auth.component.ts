@@ -188,7 +188,6 @@ export class AuthComponent {
     return myform;
   }
 
-
   redirect() {
     this.as.mailSendFeedback.set(false);
     this.directTo = 'login';

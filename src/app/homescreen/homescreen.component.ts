@@ -29,22 +29,13 @@ export class HomescreenComponent implements OnInit {
     this.ps.activeLink = '/home';
   }
 
-  /**
-   * A function "fetchVideoData" in Backend Service Intance is called. When the Component starts their livecycle.
-   */
   ngOnInit(): void {
     this.backend.fetchVideoData();
     this.backend.getFavoriteList();
   }
 
-  /**
-   * Navigates to Uploadpage
-   */
   navigateToUpload() {
     this.router.navigate(['/upload']);
   }
-
-
-
 
 }

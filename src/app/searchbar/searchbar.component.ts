@@ -26,19 +26,14 @@ export class SearchbarComponent {
 
   }
 
-  /**
- * Toggles the search state to expanded and initializes the counter.
- */
+ 
   toggleSearch() {
     this.isSearchExpanded = true;
     this.count = 0;
     this.startCount();
   }
 
-  /**
-  * Starts a counter that increments every second.
-  * When the counter exceeds 4, the variables are reset.
-  */
+
   startCount() {
     const intervalId = setInterval(() => {
       this.count++;
@@ -49,10 +44,7 @@ export class SearchbarComponent {
     }, 1000);
   }
 
-  /**
-  * Resets the variables related to the search state.
-  * Hides the search for a brief period before collapsing it.
-  */
+
   resetVar() {
     this.hide = true;
     setTimeout(() => {
@@ -62,11 +54,6 @@ export class SearchbarComponent {
     }, 300);
   }
 
-  /**
-  * Starts the search process.
-  * If the search value length is greater than or equal to 1, navigates to the search page and initiates the search.
-  * Otherwise, navigates to the home page.
-  */
   startSearch() {
     console.log(this.searchValue);
     this.count = 0;
@@ -78,10 +65,7 @@ export class SearchbarComponent {
     }
   }
 
-  /**
-  * Executes the search operation using the search service.
-  * Converts the search value to lowercase before searching.
-  */
+
   search() {
     this.searchService.search(this.searchValue.toLowerCase());
   }

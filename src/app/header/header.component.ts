@@ -25,8 +25,6 @@ export class HeaderComponent {
         return this.router.url === path;
     }
 
-
-
     openPopup() {
         this.authService.checkForGuestUser();
         this.ps.openPopup();
